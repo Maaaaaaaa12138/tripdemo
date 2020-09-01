@@ -1,0 +1,125 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "uni-app",
+				"app-plus":{
+					"titleNView": false
+				}
+			}
+		}
+	    ,{
+            "path" : "pages/index/test",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/home/home",
+            "style" : {
+				"navigationBarTitleText":"主页",
+				"enablePullDownRefresh": true // 允许下拉刷新
+			}
+        }
+        ,{
+            "path" : "pages/order/order",
+            "style" : {
+				"navigationBarTitleText":"订单页",
+				"enablePullDownRefresh": true
+			}
+        }
+        ,{
+            "path" : "pages/user/user",
+            "style" : {
+				"navigationBarTitleText":"用户页"
+			}
+        },
+		{
+					"path": "pages/my/login/login",
+					"style": {
+						"navigationBarTitleText": "登录",
+						"navigationBarTextStyle": "white",
+						"enablePullDownRefresh": false,
+						"app-plus": {
+							"bounce": "none",
+							"scrollIndicator": "none"
+							// "titleNView": false
+						}
+					}
+				},
+				{
+					"path": "pages/my/register/company",
+					"style": {
+						"navigationBarTitleText": "企业注册"
+					}
+				},
+				{
+					"path": "pages/my/register/person",
+					"style": {
+						"navigationBarTitleText": "个人注册"
+					}
+				},
+				{
+					"path": "pages/my/forget/person",
+					"style": {
+						"navigationBarTitleText": "忘记密码"
+					}
+				},
+				{
+					"path": "pages/my/register/select",
+					"style": {
+						"navigationBarTitleText": "角色选择"
+					}
+				},
+				{
+					"path": "pages/my/xieyi/xieyi",
+					"style": {
+						"navigationBarTitleText": "服务协议"
+					}
+				},
+				{
+					"path": "pages/my/yingsi/yingsi",
+					"style": {
+						"navigationBarTitleText": "隐私政策"
+					}
+				}
+        ,{
+            "path" : "pages/detail/detail",
+            "style" : {}
+        }
+    ],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#0055b8",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"height": "50px",
+		"fontSize": "10px",
+		"iconWidth": "24px",
+		"spacing": "3px",
+		"list": [{
+				"pagePath": "pages/home/home",
+				"iconPath": "static/image/dm_home.png",
+				"selectedIconPath": "static/image/dm_home_selected.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/order/order",
+				"iconPath": "static/image/dm_cart.png",
+				"selectedIconPath": "static/image/dm_cart_selected.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/user/user",
+				"iconPath": "static/image/dm_my.png",
+				"selectedIconPath": "static/image/dm_my_selected.png",
+				"text": "用户"
+			}
+		]
+	},
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#0055b8",
+		"backgroundColor": "#0055b8"
+	}
+}

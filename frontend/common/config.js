@@ -1,0 +1,8 @@
+// const ROOTPATH = "http://49.235.97.237:8085";
+const ROOTPATH = "http://49.235.97.237:8085";
+const ROOTPATH1 = "http://49.235.97.237:8085";
+module.exports = {
+	APIHOST1: ROOTPATH1,
+	APIHOST: ROOTPATH,
+	ROOTPATH: ROOTPATH
+};
