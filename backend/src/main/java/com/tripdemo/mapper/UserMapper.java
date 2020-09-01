@@ -1,0 +1,30 @@
+package com.tripdemo.mapper;
+
+import com.tripdemo.entity.MyToken;
+import com.tripdemo.entity.User;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+
+@Mapper
+public interface UserMapper {
+    @Insert("insert into user(username, password, email, phoneNumber) values" +
+            "(#{username}, #{password}, #{email}, #{phoneNumber})")
+    public void addUser(User user);
+
+    @Select("select * from user where id=#{id} or email=#{email}")
+    public User getUser(int id, String email);
+
+    @Select("select * from token where userId=#{userId} or content=#{token}")
+    public MyToken getToken(int userId, String token);
+
+    @Update("update user set password=#{password} where email=#{email}")
+    public void resetPassword(String email, String password);
+
+    @Insert("insert into token (content, userId, createTime) values(#{content}, #{userId}, #{createTime})")
+    public void setToken(int userId, String content,  long createTime);
+
+    @Update("update token set content=#{content}, createTime=#{currentTime} where userId=#{userId}")
+    public void updateToken(int userId, String content, long currentTime);
+}
