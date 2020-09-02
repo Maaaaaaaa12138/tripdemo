@@ -27,16 +27,10 @@
 		</view>
 		<view class="weixinLogin">
 			<view style="border: 1upx inset;width:30%;float: left;margin-top: 2%;margin-left: 3%;border-color: #F8F8F8;"></view>
-			第三方账号登录
-			<view style="border: 1upx inset;width:30%;float: right;margin-top: 2%;margin-right: 3%;border-color: #F8F8F8;"></view>
+
 		</view>
-		<!-- 其他登录 -->
-		<view class="other_login cuIcon">
-			<view class="login_icon_wx">
-				<image style="width: 50px;height: 50px;" src="../../../static/wx.png" @tap="login_weixin"></image>
-			</view>
-		</view>
-		<view class="footer_des">你的旅游规划专家</view>
+
+
 	</view>
 </template>
 
@@ -69,26 +63,25 @@
 				uni.request({
 					url: getApp().globalData.domain + "/users/auth",
 					method: "POST",
-					header:{
+					header: {
 						"content-type": "application/x-www-form-urlencoded"
 					},
-					data:{
+					data: {
 						email: this.phoneData,
 						password: this.passData
 					},
-					success: function(res){
+					success: function(res) {
 						let data = res.data;
-						if (data.mes){
+						if (data.mes) {
 							uni.showToast({
 								title: data.mes,
-								icon:"none"
+								icon: "none"
 							})
-						}
-						else{
+						} else {
 							getApp().globalData.isLogin = true;
 							//  存储id
 							uni.setStorage({
-								key:"userId",
+								key: "userId",
 								data: data.data.id,
 							})
 							// 存储token
@@ -98,7 +91,7 @@
 							})
 							uni.showToast({
 								title: "登录成功",
-								success:()=> {
+								success: () => {
 									uni.switchTab({
 										url: "/pages/user/user",
 									})
@@ -209,6 +202,7 @@
 <style>
 	@import url('../../../static/css/main.css');
 	@import url('../../../static/css/icon.css');
+
 	.type {
 		display: flex;
 		margin-left: 16px;
@@ -217,10 +211,11 @@
 	}
 
 	.title_des {
+		margin:0 auto;
 		font-weight: bold;
-		color: #0055b8;
+		color: #3399ff;
 		font-size: 22px;
-		margin-bottom: 32px;
+		margin-bottom: 45px;
 	}
 
 	.login_icon_wx {
@@ -247,7 +242,7 @@
 	.getCode {
 		font-size: 14px;
 		margin-left: 40px;
-		color: #0055b8;
+		color: #3399ff;
 	}
 
 	.item {
@@ -256,9 +251,9 @@
 	}
 
 	.login_image {
-		margin-top: 8px;
+		margin-top: 9px;
 		width: 20px;
-		height: 25px;
+		height: 21px;
 	}
 
 	.main-input {
@@ -281,7 +276,7 @@
 		font-size: 16px;
 		width: 260px;
 		height: 40px;
-		background: #0055b8;
+		background: #3399ff;
 		border-radius: 8px;
 		line-height: 40px;
 		text-align: center;

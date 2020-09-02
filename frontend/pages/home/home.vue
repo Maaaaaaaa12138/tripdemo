@@ -25,7 +25,7 @@
 		</uni-nav-bar>
 
 		<br>
-        <swiper-bar :imgList="hotItems" class="novelItem"></swiper-bar>
+		<swiper-bar :imgList="hotItems" class="novelItem"></swiper-bar>
 		<view class="uni-product-list">
 			<view class="uni-product" v-for="(product,index) in productList" :key="index">
 				<view class="image-view">
@@ -48,8 +48,8 @@
 	import uniNavBar from '@/components/uni-nav-bar/uni-nav-bar.vue'
 	import uniSection from '@/components/uni-section/uni-section.vue'
 	import swiperBar from "@/components/lps-swiper/lps-swiper.vue"
-	
-	
+
+
 	var dateUtils = require('../../common/util.js').dateUtils;
 
 
@@ -76,7 +76,7 @@
 			}
 		},
 		onLoad() {
-			
+
 			// console.log(getApp(	).globalData.domain)
 			this.loadData();
 			this.getHotItems();
@@ -87,14 +87,14 @@
 		methods: {
 
 			loadData(action = 'refresh') {
-				
+
 				if (action === 'refresh') {
 					this.productList = [];
 				}
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/items",
-					
+
 					success: (res) => {
 						// console.log(res)
 						self.productList = res.data.data;
@@ -110,8 +110,8 @@
 				// 	this.productList.push(item);
 				// });
 			},
-			
-			getHotItems: function(){
+
+			getHotItems: function() {
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/items/hot",
@@ -120,7 +120,7 @@
 					}
 				})
 			},
-			
+
 			bindPickerChange: function(e) {
 				console.log('picker发送选择改变，携带值为', e.target.value)
 				this.index = e.target.value
@@ -133,7 +133,7 @@
 					uni.stopPullDownRefresh();
 				}, 2000);
 			},
-			
+
 
 			clickLeft() {
 
@@ -159,19 +159,9 @@
 			},
 
 			goToDetail: function(id, name, detail, imageUrl) {
-                /*
-				let detail = {
-					author_name: '西蒙牛',
-					cover: '西部旅游网',
-					id: '121375',
-					post_id: '5310910',
-					published_at: '2020-10-10',
-					title: '少林寺一日游'
-				}*/
 				uni.navigateTo({
-					//url: "/pages/detail/detail?detailDate=" + encodeURIComponent(JSON.stringify(detail))
-				
-					url: "/pages/detail/detail?id="+id+"&name="+name + "&detail=" + detail + "&imageUrl=" + encodeURIComponent(imageUrl),
+					url: "/pages/detail/detail?id=" + id + "&name=" + name + "&detail=" + detail + "&imageUrl=" +
+						encodeURIComponent(imageUrl),
 					fail: (res) => {
 						console.log(res)
 					}
@@ -331,7 +321,7 @@
 
 
 	view {
-		font-size: 28upx;
+		font-size: 24upx;
 	}
 
 	.uni-product-list {
@@ -342,19 +332,20 @@
 	}
 
 	.uni-product {
-		padding: 20upx;
+		padding: 15upx;
 		display: flex;
 		flex-direction: column;
 	}
 
 	.image-view {
-		height: 330upx;
+		height: 240upx;
 		width: 330upx;
 		margin: 12upx 0;
 	}
 
 	.uni-product-image {
-		height: 330upx;
+		border-radius: 4px;
+		height: 240upx;
 		width: 330upx;
 	}
 

@@ -46,12 +46,12 @@
 						}
 					}
 				},
-				{
-					"path": "pages/my/register/company",
-					"style": {
-						"navigationBarTitleText": "企业注册"
-					}
-				},
+				// {
+				// 	"path": "pages/my/register/company",
+				// 	"style": {
+				// 		"navigationBarTitleText": "企业注册"
+				// 	}
+				// },
 				{
 					"path": "pages/my/register/person",
 					"style": {
@@ -119,7 +119,7 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#0055b8",
-		"backgroundColor": "#0055b8"
+		"navigationBarBackgroundColor": "#33ccff",
+		"backgroundColor": "#33ccff"
 	}
 }

@@ -127,7 +127,7 @@
 		height: 240upx;
 		padding: 20upx;
 		box-sizing: border-box;
-		background-color: #0055b8;
+		background-color: #3399ff;
 		flex-direction: row;
 		align-items: center;
 	}
@@ -228,7 +228,7 @@
 	}
 	
 	.logOut button{
-		background-color: #0055B8;
+		background-color: #3399ff;
 		color: #fff;
 	}
 </style>
