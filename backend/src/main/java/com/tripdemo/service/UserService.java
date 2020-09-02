@@ -9,14 +9,15 @@ import com.tripdemo.tool.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Random;
 
 @Service
 public class UserService {
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
-    @Autowired
+    @Resource
     private VerCodeMapper verCodeMapper;
 
     public User getUser(int id){
@@ -38,6 +39,7 @@ public class UserService {
     public MyToken getToken(String token){
         return userMapper.getToken(-1, token);
     }
+
     public void addUser(User user){
 //        密码加密
         user.setPassword(Tool.getMD5(user.getPassword()));
@@ -109,5 +111,14 @@ public class UserService {
             userMapper.setToken(userId, content, ct);
         }
         return content;
+    }
+
+    public boolean updateUser(User user){
+        try {
+            userMapper.updateUser(user);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
