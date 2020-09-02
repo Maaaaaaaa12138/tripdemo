@@ -159,18 +159,7 @@
 			},
 
 			goToDetail: function(id, name, detail, imageUrl) {
-				/*
-				let detail = {
-					author_name: '西蒙牛',
-					cover: '西部旅游网',
-					id: '121375',
-					post_id: '5310910',
-					published_at: '2020-10-10',
-					title: '少林寺一日游'
-				}*/
 				uni.navigateTo({
-					//url: "/pages/detail/detail?detailDate=" + encodeURIComponent(JSON.stringify(detail))
-
 					url: "/pages/detail/detail?id=" + id + "&name=" + name + "&detail=" + detail + "&imageUrl=" +
 						encodeURIComponent(imageUrl),
 					fail: (res) => {
@@ -343,19 +332,19 @@
 	}
 
 	.uni-product {
-		padding: 12upx;
+		padding: 15upx;
 		display: flex;
 		flex-direction: column;
 	}
 
 	.image-view {
-		height: 330upx;
+		height: 240upx;
 		width: 330upx;
 		margin: 12upx 0;
 	}
 
 	.uni-product-image {
-		border-radius: 8%;
+		border-radius: 4px;
 		height: 240upx;
 		width: 330upx;
 	}
