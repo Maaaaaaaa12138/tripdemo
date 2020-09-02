@@ -78,4 +78,14 @@ public class UserController {
         return ResData.getRes("", userService.getUser(id));
     }
 
+    @PutMapping("/")
+    public String updateUser(@RequestBody User user){
+        boolean res = userService.updateUser(user);
+        if (res) {
+            return ResData.getRes("", "修改成功");
+        } else {
+            return ResData.getRes("修改失败，请检查用户id", "");
+        }
+    }
+
 }
