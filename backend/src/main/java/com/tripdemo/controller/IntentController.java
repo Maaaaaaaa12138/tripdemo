@@ -9,10 +9,9 @@ import com.tripdemo.response.ItemData;
 import com.tripdemo.response.ResData;
 import com.tripdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +20,16 @@ import java.util.List;
  * 订单相关接口实现
  */
 @RestController
-@RequestMapping("/indent")
+@RequestMapping("/indents")
 public class IntentController {
 
-    @Autowired
+    @Resource
     private IndentMapper indentMapper;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
-    @Autowired
+    @Resource
     private ItemMapper itemMapper;
 
     /**
@@ -38,7 +37,9 @@ public class IntentController {
      * @param request: http请求对象
      * @return: 统一返回格式的结果
      */
-    @RequestMapping("/getAll")
+//    @RequestMapping("/getAll")
+//    @GetMapping("")
+    @RequestMapping("")
     public String getAll(HttpServletRequest request){
         int userId = (int) request.getAttribute("userId");
         User user = userService.getUser(userId);
@@ -53,7 +54,7 @@ public class IntentController {
         return ResData.getRes("", itemDataList);
     }
 
-    @RequestMapping("/addIndent")
+    @PostMapping("/")
     public String addIntent(HttpServletRequest request, @RequestParam("itemId") int itemId){
         int userId = (int) request.getAttribute("userId");
         int type = 1;
@@ -62,9 +63,5 @@ public class IntentController {
         return ResData.getRes("", "添加成功");
     }
 
-    // 按照id获取用户
-    @RequestMapping("/getUser")
-    public String getUser(@RequestParam("id") int id){
-        return ResData.getRes("", userService.getUser(id));
-    }
+
 }

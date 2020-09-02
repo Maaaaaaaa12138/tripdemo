@@ -10,7 +10,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter("/indent/*")
+@WebFilter("/indents/*")
 public class LoginRequired implements Filter {
     @Autowired
     private UserService userService;

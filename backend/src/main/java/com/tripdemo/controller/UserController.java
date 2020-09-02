@@ -6,20 +6,22 @@ import com.tripdemo.entity.User;
 import com.tripdemo.response.ResData;
 import com.tripdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
+@RequestMapping("users")
 public class UserController {
 
-    @Autowired
+//    @Autowired
+    @Resource
     private UserService userService;
 
     //  注册接口
-    @RequestMapping("/register")
+//    @RequestMapping("/register")
+    @PostMapping("/")
     public String register(@RequestParam("username") String username, @RequestParam("password") String password,
                           @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber,
                           @RequestParam("verCode") String verCode) {
@@ -36,7 +38,8 @@ public class UserController {
     }
 
     // 发送验证码接口
-    @RequestMapping("/sendCode")
+//    @RequestMapping("/sendCode")
+    @GetMapping("code")
     public String sendCode(@RequestParam("email") String email){
         if (userService.senVerCode(email)){
             return ResData.getRes("", "发送成功");
@@ -44,7 +47,9 @@ public class UserController {
         return ResData.getRes("发送失败，请稍后再试", "");
     }
 
-    @RequestMapping("/login")
+//    @RequestMapping("/login")
+    // 登录接口
+    @PostMapping("/auth")
     public String login(@RequestParam("email") String email, @RequestParam("password") String password){
         User user = userService.getUser(email);
        // 判断密码是否正确
@@ -54,7 +59,8 @@ public class UserController {
         return ResData.getRes("邮箱或密码错误", "");
     }
 
-    @RequestMapping("/resetPassword")
+//    @RequestMapping("/resetPassword")
+    @PutMapping("/password")
     public String resetPassword(@RequestParam("email") String email,
                                 @RequestParam("verCode") String verCode,
                                 @RequestParam("newPassword") String newPassword) {
@@ -63,6 +69,13 @@ public class UserController {
             return ResData.getRes("", "密码重置成功");
         }
         return ResData.getRes("验证码错误或超时", "");
+    }
+
+    // 按照id获取用户
+//    @RequestMapping("/getUser")
+    @GetMapping("/{id}")
+    public String getUser(@PathVariable("id") int id){
+        return ResData.getRes("", userService.getUser(id));
     }
 
 }
