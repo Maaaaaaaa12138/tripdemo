@@ -116,7 +116,7 @@
 				}
 				let self = this;
 				uni.request({
-					url: getApp().globalData.domain + "/sendCode",
+					url: getApp().globalData.domain + "/users/code",
 					data:{
 						email: self.email
 					},
@@ -139,7 +139,7 @@
 			toRegister() {
 				let self = this;
 				uni.request({
-					url: getApp().globalData.domain + "/register",
+					url: getApp().globalData.domain + "/users/",
 					method:"POST",
 					header:{
 						"content-type": "application/x-www-form-urlencoded"

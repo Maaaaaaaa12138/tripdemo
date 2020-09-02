@@ -9,16 +9,15 @@
 		globalData:{
 			domain: "http://ftp.12138.site:666",
 			Login: function(thi){
+				if (!uni.getStorageSync("userId")){
+					return
+				}
 				let self = thi;
 				uni.request({
-					url: getApp().globalData.domain + "/indent/getUser",
-					header:{
-						token: uni.getStorageSync("token")
-					},
-					data:{
-						id: uni.getStorageSync("userId")
-					},
+					
+					url: getApp().globalData.domain + "/users/" + uni.getStorageSync("userId"),
 					success:function(res){
+						// console.log(res)
 						let data = res.data;
 						if (data != "request error" && !data.mes){
 							getApp().globalData.isLogin = true

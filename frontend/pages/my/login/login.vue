@@ -67,7 +67,7 @@
 			},
 			toLogin() {
 				uni.request({
-					url: getApp().globalData.domain + "/login",
+					url: getApp().globalData.domain + "/users/auth",
 					method: "POST",
 					header:{
 						"content-type": "application/x-www-form-urlencoded"

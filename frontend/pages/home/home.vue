@@ -86,19 +86,22 @@
 		},
 		methods: {
 
-			loadData(action = 'add') {
+			loadData(action = 'refresh') {
 				
 				if (action === 'refresh') {
 					this.productList = [];
 				}
 				let self = this;
 				uni.request({
-					url: getApp().globalData.domain + "/getItems",
+					url: getApp().globalData.domain + "/items",
+					
 					success: (res) => {
+						// console.log(res)
 						self.productList = res.data.data;
 						uni.stopPullDownRefresh();
 					},
 					fail: (res) => {
+						// console.log(res)
 						console.log(res)
 					}
 				})
@@ -111,7 +114,7 @@
 			getHotItems: function(){
 				let self = this;
 				uni.request({
-					url: getApp().globalData.domain + "/getHotItems",
+					url: getApp().globalData.domain + "/items/hot",
 					success: (res) => {
 						self.hotItems = res.data.data;
 					}
@@ -130,9 +133,7 @@
 					uni.stopPullDownRefresh();
 				}, 2000);
 			},
-			onReachBottom() {
-				this.loadData();
-			},
+			
 
 			clickLeft() {
 
@@ -177,13 +178,6 @@
 				})
 			}
 		},
-		onPullDownRefresh() {
-			console.log('onPullDownRefresh')
-			setTimeout(function() {
-				uni.stopPullDownRefresh()
-				console.log('stopPullDownRefresh')
-			}, 1000)
-		}
 	}
 </script>
 
