@@ -80,7 +80,7 @@
 				}
 				let self = this;
 				uni.request({
-					url: getApp().globalData.domain + "/sendCode",
+					url: getApp().globalData.domain + "/users/code",
 					data:{
 						email: self.phoneData
 					},
@@ -109,13 +109,18 @@
 			},
 			toForget() {
 				uni.request({
-					url: getApp().globalData.domain + "/resetPassword",
+					url: getApp().globalData.domain + "/users/password",
+					method: "PUT",
+					header:{
+						"content-type": "application/x-www-form-urlencoded",
+					},
 					data:{
 						email: this.phoneData,
 						verCode: this.code,
 						newPassword: this.passData
 					},
 					success: (res) => {
+						// console.log(res)
 						if (!res.data.mes){
 							uni.showToast({
 								title: "密码重置成功",

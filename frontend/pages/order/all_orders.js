@@ -69,7 +69,7 @@ export default {
 			}
 			let self = this;
 			uni.request({
-				url: getApp().globalData.domain + "/indent/getAll",
+				url: getApp().globalData.domain + "/indents",
 				header:{
 					token: uni.getStorageSync("token")					
 				},

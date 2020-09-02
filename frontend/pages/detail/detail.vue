@@ -133,14 +133,17 @@
 			
 			addIndent: function(userId, itemId){
 				uni.request({
-					url: getApp().globalData.domain + "/indent/addIndent",
+					url: getApp().globalData.domain + "/indents/",
 					header:{
-						token: uni.getStorageSync("token")
+						token: uni.getStorageSync("token"),
+						"content-type": "application/x-www-form-urlencoded",
 					},
+					method: "POST",
 					data:{
 						itemId: itemId,
 					},
 					success: (res) => {
+						// console.log(res)
 						let data = res.data;
 						if (data == "request error"){
 							uni.showToast({
