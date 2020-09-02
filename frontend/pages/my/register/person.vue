@@ -210,10 +210,10 @@
 
 	.senCode{
 		font-size: 14px;
-		color: #0055b8;
+		color: #3399ff;
 	}
 	.title_des {
-		color: #0055b8;
+		color: #3399ff;
 		font-size: 22px;
 		margin-bottom: 32px;
 	}
@@ -247,7 +247,7 @@
 	.getCode {
 		font-size: 14px;
 		margin-left: 40px;
-		color: #0055b8
+		color: #3399ff
 	}
 
 	.item {
@@ -281,7 +281,7 @@
 		font-size: 16px;
 		width: 250px;
 		height: 40px;
-		background: #0055b8;
+		background: #3399ff;
 		border-radius: 8px;
 		line-height: 40px;
 		text-align: center;

@@ -47,52 +47,55 @@ export default {
 		//if(this.checkLogin()==false){
 		//	return;
 		//}
-		
+
 		this.refresh();
 		//执行初始化,需要用的时候，可以把注释取掉
 		//this.Refresh("init");
 	},
 	onPullDownRefresh: function() {
 		//下拉刷新的时候请求一次数据
-		this.refresh();
+		setTimeout(() => {
+			uni.stopPullDownRefresh();
+			this.refresh();
+		}, 600);
 	},
 	methods: {
-		refresh: function(){
+		refresh: function() {
 			// 判断登录状态
 			this.list_orders = [];
-			if (!getApp().globalData.isLogin){
+			if (!getApp().globalData.isLogin) {
 				uni.showToast({
-					title:"请登录",
-					icon:"none"
+					title: "请登录",
+					icon: "none"
 				})
 				return;
 			}
 			let self = this;
 			uni.request({
 				url: getApp().globalData.domain + "/indents",
-				header:{
-					token: uni.getStorageSync("token")					
+				header: {
+					token: uni.getStorageSync("token")
 				},
-				data:{
+				data: {
 					userId: uni.getStorageSync("userId")
 				},
 				success: (res) => {
 					uni.stopPullDownRefresh();
 					let data = res.data;
-					if (data == "request error"){
+					if (data == "request error") {
 						uni.showToast({
-							title:"请检查登录状态",
-							icon:"none"
+							title: "请检查登录状态",
+							icon: "none"
 						})
 						return;
 					}
-					if (!data.mes){
+					if (!data.mes) {
 						self.list_orders = res.data.data
 						return;
 					}
 					uni.showToast({
 						title: data.mes,
-						icon:"none"
+						icon: "none"
 					})
 				}
 			})
