@@ -6,7 +6,6 @@ import com.tripdemo.entity.VerCode;
 import com.tripdemo.mapper.UserMapper;
 import com.tripdemo.mapper.VerCodeMapper;
 import com.tripdemo.tool.Tool;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -42,18 +41,18 @@ public class UserService {
 
     public void addUser(User user){
 //        密码加密
-        user.setPassword(Tool.getMD5(user.getPassword()));
+        user.setPassword(Tool.getCrpy(user.getPassword()));
         userMapper.addUser(user);
     }
 
 //    验证密码是否正确
     public boolean checkPassword(int id, String password){
-        String pwd = Tool.getMD5(password);
+        String pwd = Tool.getCrpy(password);
         return pwd.equals(userMapper.getUser(id, "").getPassword());
     }
 
     public void resetPassword(String email, String password){
-        userMapper.resetPassword(email, Tool.getMD5(password));
+        userMapper.resetPassword(email, Tool.getCrpy(password));
     }
 
 //    验证token是否正确
@@ -103,7 +102,7 @@ public class UserService {
     public String setToken(int userId){
         String name = this.getUser(userId).getUsername();
         long ct = System.currentTimeMillis() / 1000;
-        String content = Tool.getMD5(name + ct);
+        String content = Tool.getCrpy(name + ct);
         if (userMapper.getToken(userId, "") != null){
             userMapper.updateToken(userId, content, ct);
         }

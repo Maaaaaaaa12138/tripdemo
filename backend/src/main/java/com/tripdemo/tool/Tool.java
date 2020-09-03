@@ -8,11 +8,14 @@ import java.security.MessageDigest;
 import java.util.Properties;
 
 public class Tool {
-    public static String getMD5(String data) {
+    // 获取密文
+    public static String getCrpy(String data) {
+        String salt = "强制加盐12138";
+        String str = data + salt;
         String res;
         try {
             MessageDigest md5 = MessageDigest.getInstance("md5");
-            md5.update(data.getBytes());
+            md5.update(str.getBytes());
             res = new BigInteger(1, md5.digest()).toString(16);
         } catch (Exception e) {
             e.printStackTrace();
