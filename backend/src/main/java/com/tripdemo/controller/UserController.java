@@ -1,5 +1,6 @@
 package com.tripdemo.controller;
 
+import com.sun.el.parser.Token;
 import com.tripdemo.entity.LoginData;
 import com.tripdemo.entity.MyToken;
 import com.tripdemo.entity.User;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.Arrays;
 import java.util.List;
@@ -84,7 +86,12 @@ public class UserController {
     }
 
     @PutMapping("/")
-    public String updateUser(@RequestBody User user){
+    public String updateUser(@RequestBody User user, HttpServletRequest request){
+        String tokenStr = request.getHeader("token");
+        MyToken token = userService.getToken(tokenStr);
+        if (token == null || token.getUserId() != user.getId()){
+            return ResData.getRes("权限验证失败, 请检查登录状态", "");
+        }
         boolean res = userService.updateUser(user);
         if (res) {
             return ResData.getRes("", "修改成功");
