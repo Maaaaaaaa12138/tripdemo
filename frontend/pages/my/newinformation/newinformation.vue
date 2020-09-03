@@ -28,7 +28,7 @@
 	align-items: center;
 }
 .news text{
-	font-size: 50px;
+	font-family: kaiti;
 	color: #b8b8b8;
 }
 </style>
