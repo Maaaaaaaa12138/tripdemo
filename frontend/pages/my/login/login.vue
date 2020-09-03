@@ -7,7 +7,7 @@
 			<view class="title_des">欢迎使用去哪儿APP</view>
 			<view class="item">
 				<image class="login_image" src="../../../static/login/email.png"></image>
-				<input v-model="phoneData" class="main-input" placeholder="请输入邮箱" />
+				<input v-model="phoneData" class="main-input" placeholder="请输入邮箱/用户名/密码" />
 			</view>
 			<view style="margin-top: 8px"></view>
 			<view class="item">
@@ -67,7 +67,7 @@
 						"content-type": "application/x-www-form-urlencoded"
 					},
 					data: {
-						email: this.phoneData,
+						identify: this.phoneData,
 						password: this.passData
 					},
 					success: function(res) {
