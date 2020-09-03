@@ -5,14 +5,16 @@ import com.tripdemo.mapper.UserMapper;
 import com.tripdemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter("/indents/*")
+@WebFilter(value = {"/indents/*", "/users/avatar"})
 public class LoginRequired implements Filter {
-    @Autowired
+//    @Autowired
+    @Resource
     private UserService userService;
 
     public void destroy() {
