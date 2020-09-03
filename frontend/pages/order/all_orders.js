@@ -11,6 +11,7 @@ export default {
 		return {
 			loadingText: '',
 			list_orders: [],
+			null_orders:[],
 			page: 0, //当前分页页码
 			apiUrl: '', //后端接口地址
 			id: '', //传值使用,方便存在本地的locakStorage

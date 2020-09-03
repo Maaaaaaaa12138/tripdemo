@@ -34,5 +34,9 @@
 </script>
 
 <style>
-	/*每个页面公共css */
+	
+	@font-face {
+		font-family: xk;
+		src: url("/static/ttf/xk.ttf");
+	}
 </style>
