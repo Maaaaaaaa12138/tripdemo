@@ -42,12 +42,6 @@
 						}
 					}
 				},
-				// {
-				// 	"path": "pages/my/register/company",
-				// 	"style": {
-				// 		"navigationBarTitleText": "企业注册"
-				// 	}
-				// },
 				{
 					"path": "pages/my/register/person",
 					"style": {
@@ -95,45 +89,7 @@
 				    "style" : {
 						"navigationBarTitleText": "帮助与反馈"
 					}
-				}
-			}
-		},
-		// {
-		// 	"path": "pages/my/register/company",
-		// 	"style": {
-		// 		"navigationBarTitleText": "企业注册"
-		// 	}
-		// },
-		{
-			"path": "pages/my/register/person",
-			"style": {
-				"navigationBarTitleText": "个人注册"
-			}
-		},
-		{
-			"path": "pages/my/forget/person",
-			"style": {
-				"navigationBarTitleText": "忘记密码"
-			}
-		},
-		{
-			"path": "pages/my/register/select",
-			"style": {
-				"navigationBarTitleText": "角色选择"
-			}
-		},
-		{
-			"path": "pages/my/xieyi/xieyi",
-			"style": {
-				"navigationBarTitleText": "服务协议"
-			}
-		},
-		{
-			"path": "pages/my/yingsi/yingsi",
-			"style": {
-				"navigationBarTitleText": "隐私政策"
-			}
-		}, {
+				}, {
 			"path": "pages/detail/detail",
 			"style": {}
 		},

@@ -17,17 +17,13 @@
 		</view>
 		<view class="btn_login" @click="startLogin">登录</view>
 		<!-- 底部信息 -->
-		<view class="footer" style="margin-top: 16px">
+		<view class="footer" style="margin-top: 40px">
 			<view>
 				<navigator url="/pages/my/register/person" open-type="navigate">新用户注册</navigator>
 			</view>
 			<view style="margin-left: 32%;">
 				<navigator url="/pages/my/forget/person" open-type="navigate">忘记密码</navigator>
 			</view>
-		</view>
-		<view class="weixinLogin">
-			<view style="border: 1upx inset;width:30%;float: left;margin-top: 2%;margin-left: 3%;border-color: #F8F8F8;"></view>
-
 		</view>
 
 
