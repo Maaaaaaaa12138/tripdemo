@@ -81,11 +81,30 @@
 					"style": {
 						"navigationBarTitleText": "隐私政策"
 					}
+				},
+				{
+				    "path" : "pages/my/aboutapp/aboutapp",
+				    "style" : {
+						"navigationBarTitleText": "关于应用"
+					}
+				},
+				{
+				    "path" : "pages/my/newinformation/newinformation",
+				    "style" : {
+						"navigationBarTitleText": "新消息通知"
+					}
+				},
+				{
+				    "path" : "pages/my/help/help",
+				    "style" : {
+						"navigationBarTitleText": "帮助与反馈"
+					}
 				}
         ,{
             "path" : "pages/detail/detail",
             "style" : {}
         }
+        
     ],
 	"tabBar": {
 		"color": "#7A7E83",
