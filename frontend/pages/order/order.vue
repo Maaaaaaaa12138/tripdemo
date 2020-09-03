@@ -28,11 +28,7 @@
 				</view>
 			</view>
 		</view>
-
-
-		<view class="loading">{{loadingText}}</view>
-		<view class="ymBbottom"></view>
-
+		<br><br><br><br>
 	</view>
 </template>
 
@@ -42,50 +38,8 @@
 </script>
 
 <style lang="scss" scoped>
-	/* 遮罩 */
-	.shade {
-		position: fixed;
-		z-index: 100;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		-webkit-touch-callout: none;
-
-		.pop {
-			position: fixed;
-			z-index: 101;
-			width: 200upx;
-			box-sizing: border-box;
-			font-size: 28upx;
-			text-align: left;
-			color: #333;
-			background-color: #fff;
-			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-			line-height: 80upx;
-			transition: transform 0.15s ease-in-out 0s;
-			user-select: none;
-			-webkit-touch-callout: none;
-			transform: scale(0, 0);
-
-			&.show {
-				transform: scale(1, 1);
-			}
-
-			&>view {
-				padding: 0 20upx;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				white-space: nowrap;
-				user-select: none;
-				-webkit-touch-callout: none;
-
-				&:active {
-					background-color: #f3f3f3;
-				}
-			}
-		}
-	}
 
 	@import './all_orders.scss'
 </style>
+
+
