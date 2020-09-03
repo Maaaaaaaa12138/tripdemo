@@ -2,7 +2,7 @@
     <view style="font-size: 14px;line-height: 26px;padding: 32upx;background: #FFFFFF;" class="home1">
         <view style="font-size: 16px;font-weight: bold">1、总则</view>
         <view style="text-align: left;text-indent: 2rem;"> 1.1、
-            去哪儿APP是901梦之队旗下产品，是一款热门旅游地点推荐、门票购买的旅游类服务平台。
+            去哪儿APP是901梦之队旗下产品，是一款热门旅游地点推荐、门票购买的旅游类服务平台。 
         </view>
         <view style="text-align: left;text-indent: 2rem;">1.2、
             用户在注册之前，应当仔细阅读本协议。用户在进行注册程序过程中，点击同意按钮，即表示用户完全接受本协议的全部条款。用户注册时实行实名认，并按照页面上的提示完成全部的注册程序，一旦注册成功，即为本软件的会员，则与去哪儿APP之间自动形成协议关系，用户应当受本协议的约束。去哪儿APP以下简称软件，服务使用人以下称用户。
