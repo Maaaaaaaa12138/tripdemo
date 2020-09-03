@@ -32,14 +32,35 @@ public class IntentController {
     @Resource
     private ItemMapper itemMapper;
 
+    @PostMapping("/")
+    public String addIntent(HttpServletRequest request, @RequestParam("itemId") int itemId){
+        int userId = (int) request.getAttribute("userId");
+        int type = 1;
+        String indentId = String.format("%s-%s", userId, System.currentTimeMillis());
+        indentMapper.addIndent(new Indent(userId, itemId, type, indentId));
+        return ResData.getRes("", "添加成功");
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteIndent(@PathVariable("id") String id){
+        try {
+            indentMapper.deleteById(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResData.getRes("订单号有误", "");
+        }
+        return ResData.getRes("", "删除成功");
+    }
+
+
     /**
      * 获取用户的所有订单
      * @param request: http请求对象
      * @return: 统一返回格式的结果
      */
 //    @RequestMapping("/getAll")
-//    @GetMapping("")
-    @RequestMapping("")
+//    @RequestMapping("")
+    @GetMapping("")
     public String getAll(HttpServletRequest request){
         int userId = (int) request.getAttribute("userId");
         User user = userService.getUser(userId);
@@ -53,15 +74,5 @@ public class IntentController {
         }
         return ResData.getRes("", itemDataList);
     }
-
-    @PostMapping("/")
-    public String addIntent(HttpServletRequest request, @RequestParam("itemId") int itemId){
-        int userId = (int) request.getAttribute("userId");
-        int type = 1;
-        String indentId = String.format("%s-%s", userId, System.currentTimeMillis());
-        indentMapper.addIndent(new Indent(userId, itemId, type, indentId));
-        return ResData.getRes("", "添加成功");
-    }
-
 
 }
