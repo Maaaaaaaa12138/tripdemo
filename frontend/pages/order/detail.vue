@@ -1,5 +1,8 @@
 <template>
 	<view class="content">
+		<view class="logo">
+			<image class="logo-img" :src="avatar"></image>
+		</view>
 		<view class="info" :style="{'background-image': 'url('+itemImg+')'}">
 			<view class="info-item">用户信息：{{userInfo}}</view>
 			<view class="info-item">订单信息：{{itemInfo}}</view>
@@ -9,7 +12,9 @@
 			<text @tap="delOrder">删除</text>
 			<!-- <text @tap='test'>测试</text> -->
 		</view>
-		<!-- <button @tap="delOrder" type="warn">删除订单</button> -->
+		<view class="Copyright">
+			<text >Copyright © 2020 901梦之队 荣誉出品</text>
+		</view>
 	</view>
 </template>
 
@@ -20,14 +25,16 @@
 				indentNo: -1,
 				userInfo: "",
 				itemInfo: "",
-				itemImg: ""
+				itemImg: "",
+				avatar: "/static/logo.jpg"
 			}
 		},
 		onLoad(option) {
 			this.indentNo = option.indentNo;
 			this.userInfo = option.userInfo;
 			this.itemInfo = option.itemInfo;
-			this.getItemImg()
+			this.getItemImg();
+			this.loadUserInfo();
 		},
 		methods: {
 			//删除订单
@@ -71,6 +78,15 @@
 			test: function(){
 				console.log("test")
 			},
+			loadUserInfo(){
+				let self = this;
+				uni.request({
+					url: getApp().globalData.domain + "/users/" + uni.getStorageSync("userId"),
+					success: (res) => {
+						self.avatar = getApp().globalData.domain + res.data.data.avatar;
+					}
+				})
+			},
 			getItemImg: function(){
 				let self = this;
 				uni.request({
@@ -88,8 +104,21 @@
 </script>
 
 <style>
-	
+	.logo {
+		margin-top: 50px;
+		margin-bottom: 50px;
+		width: 100%;
+		height: 180upx;
+		padding: 20upx;
+		text-align: center;
+	}
+	.logo-img {
+		width: 150upx;
+		height: 150upx;
+		border-radius: 150upx;
+	}
 	.content{
+		box-sizing: border-box;
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -97,7 +126,6 @@
 		height: 100%;
 		background-color: #f1f2f1;
 		display: flex;
-		justify-content: center;
 		align-items: center;
 		flex-direction: column;
 	}
@@ -140,5 +168,12 @@
 		color: #007AFF;
 		margin-left: 15px;
 		margin-right: 15px;
+	}
+	.Copyright{
+		position: fixed;
+		bottom: 10px;
+		font-family: kaiti;
+		color: #888888;
+		font-size: 13px;
 	}
 </style>
