@@ -5,7 +5,7 @@
 			<swiper class="imageContainer" @change="handleChange" interval="3000" previous-margin="50rpx" next-margin="50rpx" circular  autoplay>
 				<block v-for="(item,index) in imgList" :key="index">
 					<swiper-item class="swiperitem">
-						<image class="itemImg" @click="toNovel(item.novel.id, item.novel.name)" :class="currentIndex == index ? 'swiperactive': ''" :src="item.imageUrl" lazy-load mode="scaleToFill"></image>
+						<image class="itemImg" @click="goToDetail(item.id, item.name, item.detail, item.imageUrl)" :class="currentIndex == index ? 'swiperactive': ''" :src="item.imageUrl" lazy-load mode="scaleToFill"></image>
 					</swiper-item>
 				</block>
 			</swiper>
@@ -46,9 +46,13 @@
 			 handleChange(e){
 				 this.currentIndex = e.detail.current;
 			 },
-			 toNovel(id, name){
+			 goToDetail: function(id, name, detail, imageUrl) {
 			 	uni.navigateTo({
-			 		url: "../../pages/index/novel?id=" + id + "&name=" + encodeURIComponent(name),
+			 		url: "/pages/detail/detail?id=" + id + "&name=" + name + "&detail=" + detail + "&imageUrl=" +
+			 			encodeURIComponent(imageUrl),
+			 		fail: (res) => {
+			 			console.log(res)
+			 		}
 			 	})
 			 }
 		}
