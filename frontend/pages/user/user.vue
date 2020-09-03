@@ -13,26 +13,26 @@
 				<text class="list-text">帐号管理</text>
 				<text class="navigat-arrow">&#xe65e;</text>
 			</view>
-			<view class="center-list-item">
+			<view class="center-list-item" @click="goNewinformation">
 				<text class="list-icon">&#xe639;</text>
 				<text class="list-text">新消息通知</text>
 				<text class="navigat-arrow">&#xe65e;</text>
 			</view>
 		</view>
 		<view class="center-list">
-			<view class="center-list-item border-bottom">
+			<view class="center-list-item border-bottom" @click="goHelp">
 				<text class="list-icon">&#xe60b;</text>
 				<text class="list-text">帮助与反馈</text>
 				<text class="navigat-arrow">&#xe65e;</text>
 			</view>
-			<view class="center-list-item">
+			<view class="center-list-item" @click="goYingsi">
 				<text class="list-icon">&#xe65f;</text>
 				<text class="list-text">服务条款及隐私</text>
 				<text class="navigat-arrow">&#xe65e;</text>
 			</view>
 		</view>
 		<view class="center-list">
-			<view class="center-list-item">
+			<view class="center-list-item" @click="goAbout">
 				<text class="list-icon">&#xe614;</text>
 				<text class="list-text">关于应用</text>
 				<text class="navigat-arrow">&#xe65e;</text>
@@ -75,6 +75,26 @@
 						animationDuration:300
 					})
 				}
+			},
+			goYingsi(){
+				uni.navigateTo({
+					url: "/pages/my/yingsi/yingsi",
+				})
+			},
+			goAbout(){
+				uni.navigateTo({
+					url: "/pages/my/aboutapp/aboutapp",
+				})
+			},
+			goHelp(){
+				uni.navigateTo({
+					url: "/pages/my/help/help",
+				})
+			},
+			goNewinformation(){
+				uni.navigateTo({
+					url: "/pages/my/newinformation/newinformation",
+				})
 			},
 			logOut(){
 				getApp().globalData.isLogin = false

@@ -29,6 +29,7 @@ class Item(models.Model):
     originalcost = models.IntegerField(db_column='originalCost', blank=True, null=True)  # Field name made lowercase.
     currentcost = models.IntegerField(db_column='currentCost', blank=True, null=True)  # Field name made lowercase.
     detail = models.TextField(blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -56,6 +57,7 @@ class User(models.Model):
     password = models.CharField(max_length=255, blank=True, null=True)
     email = models.CharField(max_length=255, blank=True, null=True)
     phonenumber = models.CharField(db_column='phoneNumber', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    avatar = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.username
@@ -76,3 +78,14 @@ class Vercode(models.Model):
     class Meta:
         managed = True
         db_table = 'vercode'
+
+class FeedBack(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    content = models.TextField()
+    userId = models.IntegerField()
+
+    def __str__(self):
+        return str(self.userId) + "-" + self.title
+    
+    class Meta:
+        db_table = "feedback"

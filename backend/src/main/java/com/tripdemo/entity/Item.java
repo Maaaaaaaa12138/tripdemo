@@ -11,8 +11,12 @@ public class Item {
     private int originalCost; //项目原价
     private int currentCost; // 项目现价
     private String detail; // 项目细节介绍
+    private String location; // 项目地点（省）
 
-    public Item(int id, String name, String type, String imageUrl, int originalCost, int currentCost, String detail) {
+    public Item() {
+    }
+
+    public Item(int id, String name, String type, String imageUrl, int originalCost, int currentCost, String detail, String location) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -20,6 +24,15 @@ public class Item {
         this.originalCost = originalCost;
         this.currentCost = currentCost;
         this.detail = detail;
+        this.location = location;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public int getId() {
