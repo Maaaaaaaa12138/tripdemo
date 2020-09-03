@@ -11,7 +11,8 @@
 		</view> -->
 		<br>
 		<view class="article-content">
-			<rich-text :nodes="htmlString"></rich-text>
+			<!-- <rich-text :nodes="htmlString"></rich-text> -->
+			<text class="content">{{htmlString}}</text>
 		</view>
 		<!-- #ifdef MP-WEIXIN -->
 		<ad v-if="htmlString" unit-id="adunit-01b7a010bf53d74e"></ad>
@@ -307,9 +308,13 @@
 	}
 
 	.article-content {
-		padding: 0 30upx;
+		padding: 20 40upx;
 		overflow: hidden;
 		font-size: 30upx;
-		margin-bottom: 30upx;
+		margin:30upx 50upx;
+	}
+	
+	.content{
+		white-space: pre-wrap;
 	}
 </style>

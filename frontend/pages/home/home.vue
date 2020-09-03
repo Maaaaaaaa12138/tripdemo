@@ -143,6 +143,7 @@
 			},
 			search() {
 				uni.showToast({
+					icon:'none',
 					title: '搜索没写'
 				})
 			},
@@ -154,6 +155,7 @@
 			},
 			confirm() {
 				uni.showToast({
+					icon:'none',
 					title: '搜索没写'
 				})
 			},
