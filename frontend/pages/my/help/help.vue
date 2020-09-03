@@ -1,11 +1,11 @@
 <template>
 	<view>
 		<view class="item">
-			<input v-model="Ftitle" class="main-input" type="text" maxlength="30" placeholder="请输入您问题的标题"></input>
+			<input v-model="Ftitle" class="main-input" type="text" maxlength="30" placeholder="请输入您的问题摘要"></input>
 		</view>
-		<textarea v-model="Ftext" placeholder="请输入您问题的详细情况后提交反馈按键" class="text_area"></textarea>
+		<textarea v-model="Ftext" :focus="test" placeholder="请输入问题的详细描述" class="text_area"></textarea>
 		
-		<view class="btn_login" @click="feedback">反馈</view>
+		<view class="btn_login" @click="feedback">提交</view>
 	</view>
 </template>
 
@@ -18,6 +18,9 @@
 			}
 		},
 		methods: {
+			test: function(){
+				console.log("sss")
+			},
 			feedback:function(){
 				if (!getApp().globalData.isLogin){
 					uni.showToast({
@@ -49,7 +52,12 @@
 						token:uni.getStorageSync("token")
 					},
 					success:(res)=>{
-						console.log(res.data);
+						uni.showToast({
+							title: "添加成功",
+						})
+						setTimeout(()=>{
+							uni.navigateBack()
+						},500)
 					}
 				})
 			}
@@ -58,38 +66,45 @@
 </script>
 
 <style>
+	page{
+		font-family: kaiti;
+	}
 	.item {
+		margin-top: 50px;
 		line-height: 40px;
-		display: flex;
-		justify-content:center;
-		position: fixed;
 	}
 	.main-input {
-		font-size: 14px;
-		margin-left: 100px;
+		font-size: 20px;
+		margin-left: 30px;
+		margin-right: 15px;
 		border-bottom: 1px solid #eeeeee;
 		height: 40px;
 		line-height: 40px;
+		font-weight: 600;
 	}
 	.btn_login {
-		position: fixed;
 		color: #ffffff;
 		font-size: 16px;
-		width: 260px;
-		height: 40px;
+		margin-left: 70px;
+		margin-right: 70px;
+		margin-top: 30px;
 		background: #3399ff;
 		border-radius: 8px;
 		line-height: 40px;
 		text-align: center;
-		bottom:100px;
-		left: 75px;
 	}
 	.text_area{
+		color: #495057;
+		margin-top: 30px;
 		height: 500px;
-		top:70px;
+		padding: 30rpx;
 		font-size: 16px;
-		background: #efefef;
-		border: 1px #0055B8;
-		margin: auto;
+		border: 1px solid #ced4da;
+		border-radius: 16px;
+		margin-left: 30px;
+		margin-right: 15px;
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 	}
+	/* 
+	 */
 </style>
