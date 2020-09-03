@@ -24,6 +24,7 @@
 							self.login = true
 							self.userInfo.id = data.data.id;
 							self.userInfo.username = data.data.username;
+							self.userInfo.avatarUrl = getApp().globalData.domain + data.data.avatar;
 						}
 					}
 				})
