@@ -29,6 +29,7 @@ class Item(models.Model):
     originalcost = models.IntegerField(db_column='originalCost', blank=True, null=True)  # Field name made lowercase.
     currentcost = models.IntegerField(db_column='currentCost', blank=True, null=True)  # Field name made lowercase.
     detail = models.TextField(blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.name

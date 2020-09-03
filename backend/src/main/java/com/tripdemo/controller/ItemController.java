@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("items")
@@ -20,12 +21,13 @@ public class ItemController {
     // 获取订单接口
     @GetMapping("")
     public String getItems(@RequestParam(value = "page", required = false) Integer page,
-                           @RequestParam(value = "size", required = false) Integer size) {
+                           @RequestParam(value = "size", required = false) Integer size,
+                           @RequestParam(value = "location", required = false) String location) {
         List<Item> items;
         if (page == null) {
-            items = itemMapper.getItem(0, 10);
+            items = itemMapper.getItem(0, 10, Objects.requireNonNullElse(location, "北京"));
         } else {
-            items = itemMapper.getItem(page, size);
+            items = itemMapper.getItem(page, size, location);
         }
         return ResData.getRes("", items);
     }
