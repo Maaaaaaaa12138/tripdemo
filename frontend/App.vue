@@ -36,7 +36,7 @@
 <style>
 	
 	@font-face {
-		font-family: xk;
-		src: url("/static/ttf/xk.ttf");
+		font-family: kaiti;
+		src: url("/static/ttf/kaiti.ttf");
 	}
 </style>

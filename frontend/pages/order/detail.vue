@@ -48,7 +48,6 @@
 									token: uni.getStorageSync("token")
 								},
 								success: function(res1) {
-									console.log(res1.data)
 									if (res1.data.mes) { //删除失败
 										uni.showToast({
 											title: "订单不存在"
@@ -81,7 +80,6 @@
 					},
 					success: (res) => {
 						self.itemImg = res.data.data.imageUrl
-						console.log(res.data.data.imageUrl)
 					}
 				})
 			}
@@ -102,7 +100,6 @@
 		justify-content: center;
 		align-items: center;
 		flex-direction: column;
-		font-family: xk;
 	}
 	.info{
 		position: relative;
@@ -134,6 +131,7 @@
 		color: #FFFFFF;
 		margin-top: 15px;
 		margin-bottom: 15px;
+		font-family: kaiti;
 	}
 	.option{
 		margin-top:40px;
