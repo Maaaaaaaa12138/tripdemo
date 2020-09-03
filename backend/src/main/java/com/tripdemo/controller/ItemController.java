@@ -49,4 +49,13 @@ public class ItemController {
         }
         return ResData.getRes("id错误", "");
     }
+
+    @GetMapping("/")
+    public String getItemByName(@RequestParam("name") String name){
+        Item item = itemMapper.getItemByName(name);
+        if (item != null){
+            return ResData.getRes("", item);
+        }
+        return ResData.getRes("id错误", "");
+    }
 }

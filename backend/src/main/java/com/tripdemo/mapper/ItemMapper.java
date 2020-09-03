@@ -18,4 +18,7 @@ public interface ItemMapper {
 
     @Select("select * from item where id=#{id}")
     public Item getItemById(int id);
+
+    @Select("select * from item where name=#{name}")
+    public Item getItemByName(String name);
 }
