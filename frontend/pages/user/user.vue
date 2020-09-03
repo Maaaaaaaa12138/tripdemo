@@ -62,9 +62,7 @@
 			getApp().globalData.Login(this)
 		},
 		onShow:function(){
-			if (!this.login){ 
-				getApp().globalData.Login(this)
-			}
+			getApp().globalData.Login(this)
 		},
 		methods: {
 			goLogin() {
