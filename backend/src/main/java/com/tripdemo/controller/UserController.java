@@ -50,8 +50,8 @@ public class UserController {
 //    @RequestMapping("/login")
     // 登录接口
     @PostMapping("/auth")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password){
-        User user = userService.getUser(email);
+    public String login(@RequestParam("identify") String identify, @RequestParam("password") String password){
+        User user = userService.getUser(identify);
        // 判断密码是否正确
         if (user != null && userService.checkPassword(user.getId(), password)) {
             return ResData.getRes("", new LoginData(user.getId(), userService.setToken(user.getId())));
