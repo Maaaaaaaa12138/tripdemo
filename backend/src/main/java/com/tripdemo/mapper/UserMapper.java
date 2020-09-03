@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Service;
 
 @Mapper
 public interface UserMapper {
@@ -15,6 +16,12 @@ public interface UserMapper {
 
     @Select("select * from user where id=#{id} or email=#{email}")
     public User getUser(int id, String email);
+
+    @Select("select * from user where username=#{username}")
+    public User getUserByUsername(String username);
+
+    @Select("select * from user where phoneNumber=#{phoneNumber}")
+    public User getUserByPhoneNumber(String phoneNumber);
 
     @Select("select * from token where userId=#{userId} or content=#{token}")
     public MyToken getToken(int userId, String token);

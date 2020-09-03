@@ -27,12 +27,25 @@ public class UserService {
     }
 
     public User getUser(String email){
-        User user = userMapper.getUser(-1,email);
-        if (user == null){
-            return null;
+        User user = null;
+        // 用邮箱判断
+        user = userMapper.getUser(-1,email);
+        if (user != null){
+            user.setPassword("");
+            return user;
         }
-        user.setPassword("");
-        return user;
+        // 根据用户名判断
+        user = userMapper.getUserByUsername(email);
+        if (user != null){
+            user.setPassword("");
+            return user;
+        }
+        user = userMapper.getUserByPhoneNumber(email);
+        if (user != null){
+            user.setPassword("");
+            return user;
+        }
+        return null;
     }
 
     public MyToken getToken(String token){
