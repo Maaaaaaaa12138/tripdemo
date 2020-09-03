@@ -5,11 +5,16 @@ import com.tripdemo.entity.MyToken;
 import com.tripdemo.entity.User;
 import com.tripdemo.response.ResData;
 import com.tripdemo.service.UserService;
+import com.tripdemo.tool.Tool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.*;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("users")
@@ -30,7 +35,7 @@ public class UserController {
             return ResData.getRes("该邮箱已注册", "");
         }
         if (userService.checkVerCode(email, verCode)){
-            User user = new User(username, password, email, 0, phoneNumber);
+            User user = new User(username, password, email, 0, phoneNumber, "");
             userService.addUser(user);
             return ResData.getRes("", "注册成功");
         }
@@ -85,6 +90,33 @@ public class UserController {
             return ResData.getRes("", "修改成功");
         } else {
             return ResData.getRes("修改失败，请检查用户id", "");
+        }
+    }
+
+//    @CrossOrigin("*")
+    @PostMapping("/avatar")
+    // 实现图片上传
+    public String addAvatar(@RequestParam("file") MultipartFile file) {
+        final String fileDir = "src\\main\\resources\\static\\avatar\\";
+        String fileName;
+        if (!file.isEmpty()) {
+            try {
+                fileName = Tool.getCrpy(Arrays.toString(file.getBytes())) + ".jpg";
+                BufferedOutputStream out = new BufferedOutputStream(
+                        new FileOutputStream(new File(
+                                fileDir + fileName)));
+                out.write(file.getBytes());
+                out.flush();
+                out.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return ResData.getRes(e.getMessage(), "");
+            }
+
+            return ResData.getRes("", "/static/avatar/"+fileName);
+
+        } else {
+            return ResData.getRes("文件为空", "");
         }
     }
 

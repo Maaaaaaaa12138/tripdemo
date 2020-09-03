@@ -35,6 +35,6 @@ public interface UserMapper {
     @Update("update token set content=#{content}, createTime=#{currentTime} where userId=#{userId}")
     public void updateToken(int userId, String content, long currentTime);
 
-    @Update("update user set username=#{username}, phoneNumber=#{phoneNumber} where id=#{id}")
+    @Update("update user set username=#{username}, phoneNumber=#{phoneNumber}, avatar=#{avatar} where id=#{id}")
     public void updateUser(User user);
 }
