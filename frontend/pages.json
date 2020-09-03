@@ -4,87 +4,90 @@
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "uni-app",
-				"app-plus":{
+				"app-plus": {
 					"titleNView": false
 				}
 			}
-		}
-	    ,{
-            "path" : "pages/index/test",
-            "style" : {}
-        }
-        ,{
-            "path" : "pages/home/home",
-            "style" : {
-				"navigationBarTitleText":"主页",
+		}, {
+			"path": "pages/index/test",
+			"style": {}
+		}, {
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "主页",
 				"enablePullDownRefresh": true // 允许下拉刷新
 			}
-        }
-        ,{
-            "path" : "pages/order/order",
-            "style" : {
-				"navigationBarTitleText":"订单页",
+		}, {
+			"path": "pages/order/order",
+			"style": {
+				"navigationBarTitleText": "订单页",
 				"enablePullDownRefresh": true
 			}
-        }
-        ,{
-            "path" : "pages/user/user",
-            "style" : {
-				"navigationBarTitleText":"用户页"
+		}, {
+			"path": "pages/user/user",
+			"style": {
+				"navigationBarTitleText": "用户页"
 			}
-        },
+		},
 		{
-					"path": "pages/my/login/login",
-					"style": {
-						"navigationBarTitleText": "登录",
-						"navigationBarTextStyle": "white",
-						"enablePullDownRefresh": false,
-						"app-plus": {
-							"bounce": "none",
-							"scrollIndicator": "none"
-							// "titleNView": false
-						}
-					}
-				},
-				// {
-				// 	"path": "pages/my/register/company",
-				// 	"style": {
-				// 		"navigationBarTitleText": "企业注册"
-				// 	}
-				// },
-				{
-					"path": "pages/my/register/person",
-					"style": {
-						"navigationBarTitleText": "个人注册"
-					}
-				},
-				{
-					"path": "pages/my/forget/person",
-					"style": {
-						"navigationBarTitleText": "忘记密码"
-					}
-				},
-				{
-					"path": "pages/my/register/select",
-					"style": {
-						"navigationBarTitleText": "角色选择"
-					}
-				},
-				{
-					"path": "pages/my/xieyi/xieyi",
-					"style": {
-						"navigationBarTitleText": "服务协议"
-					}
-				},
-				{
-					"path": "pages/my/yingsi/yingsi",
-					"style": {
-						"navigationBarTitleText": "隐私政策"
-					}
+			"path": "pages/my/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none"
+					// "titleNView": false
 				}
-        ,{
-            "path" : "pages/detail/detail",
-            "style" : {}
+			}
+		},
+		// {
+		// 	"path": "pages/my/register/company",
+		// 	"style": {
+		// 		"navigationBarTitleText": "企业注册"
+		// 	}
+		// },
+		{
+			"path": "pages/my/register/person",
+			"style": {
+				"navigationBarTitleText": "个人注册"
+			}
+		},
+		{
+			"path": "pages/my/forget/person",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
+			}
+		},
+		{
+			"path": "pages/my/register/select",
+			"style": {
+				"navigationBarTitleText": "角色选择"
+			}
+		},
+		{
+			"path": "pages/my/xieyi/xieyi",
+			"style": {
+				"navigationBarTitleText": "服务协议"
+			}
+		},
+		{
+			"path": "pages/my/yingsi/yingsi",
+			"style": {
+				"navigationBarTitleText": "隐私政策"
+			}
+		}, {
+			"path": "pages/detail/detail",
+			"style": {}
+		},
+		{
+			"path": "pages/order/changan",
+			"style": {}
+		}
+	    ,{
+            "path" : "pages/order/detail",
+            "style" : {"navigationBarTitleText": "订单详情"}
         }
     ],
 	"tabBar": {

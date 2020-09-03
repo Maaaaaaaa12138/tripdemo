@@ -11,13 +11,9 @@ export default {
 		return {
 			loadingText: '',
 			list_orders: [],
-
-
-
 			page: 0, //当前分页页码
 			apiUrl: '', //后端接口地址
-			id: '', //传值使用,方便存在本地的locakStorage  
-			del_id: '' //方便存在本地的locakStorage  
+			id: '', //传值使用,方便存在本地的locakStorage
 		}
 	},
 	components: {
@@ -60,6 +56,13 @@ export default {
 		}, 600);
 	},
 	methods: {
+		gotoOrderDetail: function(index) {
+			console.log(index);
+			console.log(JSON.stringify(this.list_orders[index]));
+			uni.navigateTo({
+				url: "/pages/order/detail?userInfo=" + this.list_orders[index]["userInfo"] +"&indentNo=" + this.list_orders[index]["indentNo"] + "&itemInfo=" +this.list_orders[index]["itemInfo"]
+			})
+		},
 		refresh: function() {
 			// 判断登录状态
 			this.list_orders = [];
@@ -100,43 +103,6 @@ export default {
 				}
 			})
 		},
-		/**
-		 * all_orders_6_6处理函数
-		 * 数据绑定  data-index="{{index}}" 
-		 * 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
-		 */
-		all_orders_6_6_click: function(event) {
-
-		},
-
-		/**
-		 * all_orders_8_8处理函数
-		 * 数据绑定  data-index="{{index}}" 
-		 * 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
-		 */
-		all_orders_8_8_click: function(event) {
-
-		},
-
-		/**
-		 * all_orders_10_10处理函数
-		 * 数据绑定  data-index="{{index}}" 
-		 * 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
-		 */
-		all_orders_10_10_click: function(event) {
-
-		},
-
-		/**
-		 * all_orders_12_12处理函数
-		 * 数据绑定  data-index="{{index}}" 
-		 * 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
-		 */
-		all_orders_12_12_click: function(event) {
-
-		},
-
-
 
 		//刷新数据
 		Refresh: function(_action) {
