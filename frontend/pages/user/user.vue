@@ -124,10 +124,10 @@
 
 	.logo {
 		width: 750upx;
-		height: 240upx;
+		height: 180upx;
 		padding: 20upx;
 		box-sizing: border-box;
-		background-color: #3399ff;
+		background-color: #33ccff;
 		flex-direction: row;
 		align-items: center;
 	}
@@ -223,6 +223,10 @@
 	}
 	
 	.logOut{
+		position: absolute;
+		bottom: 80px;
+		width: 100%;
+		text-align: center;
 		margin-top: 20px;
 		
 	}
