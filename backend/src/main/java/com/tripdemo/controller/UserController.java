@@ -35,7 +35,7 @@ public class UserController {
             return ResData.getRes("该邮箱已注册", "");
         }
         if (userService.checkVerCode(email, verCode)){
-            User user = new User(username, password, email, 0, phoneNumber);
+            User user = new User(username, password, email, 0, phoneNumber, "");
             userService.addUser(user);
             return ResData.getRes("", "注册成功");
         }

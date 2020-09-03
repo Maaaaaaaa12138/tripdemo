@@ -57,6 +57,7 @@ class User(models.Model):
     password = models.CharField(max_length=255, blank=True, null=True)
     email = models.CharField(max_length=255, blank=True, null=True)
     phonenumber = models.CharField(db_column='phoneNumber', max_length=255, blank=True, null=True)  # Field name made lowercase.
+    avatar = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.username
