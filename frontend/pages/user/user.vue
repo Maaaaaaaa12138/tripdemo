@@ -8,7 +8,7 @@
 			</view>
 		</view>
 		<view class="center-list">
-			<view class="center-list-item border-bottom">
+			<view class="center-list-item border-bottom" @tap="gotoUpdate">
 				<text class="list-icon">&#xe60f;</text>
 				<text class="list-text">帐号管理</text>
 				<text class="navigat-arrow">&#xe65e;</text>
@@ -89,6 +89,11 @@
 			goHelp(){
 				uni.navigateTo({
 					url: "/pages/my/help/help",
+				})
+			},
+			gotoUpdate(){
+				uni.navigateTo({
+					url: "/pages/user/updateInfo"
 				})
 			},
 			goNewinformation(){

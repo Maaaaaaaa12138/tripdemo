@@ -102,6 +102,12 @@
             "style" : {"navigationBarTitleText": "订单详情"}
         }
         
+        ,{
+            "path" : "pages/user/updateInfo",
+            "style" : {
+				"navigationBarTitleText":"账号管理"
+			}
+        }
     ],
 	"tabBar": {
 		"color": "#7A7E83",
