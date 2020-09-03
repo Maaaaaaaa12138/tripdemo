@@ -11,7 +11,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter(value = {"/indents/*", "/users/avatar"})
+@WebFilter(value = {"/indents/*",
+        "/users/avatar",
+        "/feedbacks/*"})
 public class LoginRequired implements Filter {
 //    @Autowired
     @Resource

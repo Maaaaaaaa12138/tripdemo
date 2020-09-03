@@ -78,3 +78,14 @@ class Vercode(models.Model):
     class Meta:
         managed = True
         db_table = 'vercode'
+
+class FeedBack(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    content = models.TextField()
+    userId = models.IntegerField()
+
+    def __str__(self):
+        return str(self.userId) + "-" + self.title
+    
+    class Meta:
+        db_table = "feedback"
