@@ -94,7 +94,9 @@
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/items",
-
+					data:{
+						location: self.array[self.index]
+					},
 					success: (res) => {
 						// console.log(res)
 						self.productList = res.data.data;
@@ -122,8 +124,9 @@
 			},
 
 			bindPickerChange: function(e) {
-				console.log('picker发送选择改变，携带值为', e.target.value)
-				this.index = e.target.value
+				// console.log('picker发送选择改变，携带值为', e.target.value);
+				this.index = e.target.value;
+				this.loadData();
 			},
 
 			onPullDownRefresh() {
