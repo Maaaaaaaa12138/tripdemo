@@ -21,4 +21,7 @@ public interface ItemMapper {
 
     @Select("select * from item where name=#{name}")
     public Item getItemByName(String name);
+
+    @Select("select * from item where name like #{name}")
+    public List<Item> searchItemByName(String name);
 }
