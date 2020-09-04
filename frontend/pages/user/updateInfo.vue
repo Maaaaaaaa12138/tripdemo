@@ -91,7 +91,7 @@
 									return;
 								}
 								self.avatar = JSON.parse(res.data).data;
-								console.log(self.avatar)
+								// console.log(self.avatar)
 							},
 							fail(res) {
 								// console.log(res);
@@ -107,7 +107,7 @@
 					count: 1, //只可选择一张
 					sourceType: ['album', 'camera'],
 					success: (res) => {
-						console.log(res.tempFilePaths);
+						// console.log(res.tempFilePaths);
 						self.preImage = res.tempFilePaths[0];
 						self.bindOpen();
 					}
