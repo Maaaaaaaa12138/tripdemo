@@ -12,14 +12,17 @@
 			<text @tap="delOrder">删除</text>
 			<!-- <text @tap='test'>测试</text> -->
 		</view>
-		<view class="Copyright">
-			<text >Copyright © 2020 901梦之队 荣誉出品</text>
-		</view>
+		<Copyright/>
+
 	</view>
 </template>
 
 <script>
+	import Copyright from '@/components/Copyright/Copyright.vue'
 	export default {
+		components: {
+			Copyright
+		},
 		data() {
 			return {
 				indentNo: -1,

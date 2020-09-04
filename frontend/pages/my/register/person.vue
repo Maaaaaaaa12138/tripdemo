@@ -46,19 +46,20 @@
 			<navigator url="/pages/my/xieyi/xieyi" open-type="navigate">《用户服务协议》</navigator>和
 			<navigator url="/pages/my/yingsi/yingsi" open-type="navigate">《用户隐私协议》</navigator>
 		</view>
-		<view class="Copyright">
-			<text>Copyright © 2020 901梦之队 荣誉出品</text>
-		</view>
+		<Copyright/>
+
 	</view>
 </template>
 
 <script>
 	var _this;
 	import getCode from '@/components/get-code.vue'
-
+	import Copyright from '@/components/Copyright/Copyright.vue'
+			
 	export default {
 		components: {
-			getCode
+			getCode,
+			Copyright
 		},
 		data() {
 			return {

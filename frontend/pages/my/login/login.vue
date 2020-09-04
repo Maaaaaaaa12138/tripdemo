@@ -26,17 +26,17 @@
 			</view>
 		</view>
 
-		<view class="Copyright">
-			<text>Copyright © 2020 901梦之队 荣誉出品</text>
-		</view>
+		<Copyright/>
 	</view>
 </template>
 
 <script>
 	var _this;
-
-
+	import Copyright from '@/components/Copyright/Copyright.vue'
 	export default {
+		components: {
+			Copyright
+		},
 		data() {
 			return {
 				//logo图片 base64

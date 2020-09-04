@@ -19,7 +19,7 @@
 		<!-- #endif -->
 		<view>
 			<hr>
-			
+
 			<!--
 			<view class='line'>
 				<view class='lineLeft'>地址</view>
@@ -38,13 +38,18 @@
 				提交订单
 			</view>
 		</view>
+		<Copyright></Copyright>
 	</view>
 </template>
 
 <script>
 	const valid = require('../../util/valid.js'); //校验规则文件
 	const util = require('../../util/util.js'); //防重点击函数
+	import Copyright from '@/components/Copyright/Copyright.vue'
 	export default {
+		components: {
+			Copyright
+		},
 		data() {
 			return {
 				id: 0,
@@ -101,7 +106,7 @@
 					this.form[name] = tempVal
 				}
 			},
-			
+
 			// 验证方法
 			toVaild(tempList) {
 				// valid(value,type)为引入的校验方法,49行可见
@@ -120,45 +125,45 @@
 			},
 
 			// 提交
-			submit: function(){
+			submit: function() {
 				// 判断登录状态
-				if (!getApp().globalData.isLogin){
+				if (!getApp().globalData.isLogin) {
 					uni.showToast({
-						title:"请登录",
+						title: "请登录",
 						icon: "none"
 					})
 					return;
 				}
 				this.addIndent(uni.getStorageSync("userId"), this.id)
 			},
-			
-			addIndent: function(userId, itemId){
+
+			addIndent: function(userId, itemId) {
 				uni.request({
 					url: getApp().globalData.domain + "/indents/",
-					header:{
+					header: {
 						token: uni.getStorageSync("token"),
 						"content-type": "application/x-www-form-urlencoded",
 					},
 					method: "POST",
-					data:{
+					data: {
 						itemId: itemId,
 					},
 					success: (res) => {
 						// console.log(res)
 						let data = res.data;
-						if (data == "request error"){
+						if (data == "request error") {
 							uni.showToast({
-								title:"token验证失败",
+								title: "token验证失败",
 								icon: "none"
 							})
 							return;
 						}
-						if (!data.mes){
+						if (!data.mes) {
 							uni.showToast({
 								title: "添加成功",
-								duration:300,
+								duration: 300,
 								success: () => {
-										setTimeout(uni.navigateBack, 300)
+									setTimeout(uni.navigateBack, 300)
 								}
 							})
 						}
@@ -166,21 +171,21 @@
 				})
 			},
 
-		getDetail() {
-			uni.request({
-				url: 'https://unidemo.dcloud.net.cn/api/news/36kr/' + this.banner.post_id,
-				success: (data) => {
-					if (data.statusCode == 200) {
-						this.htmlString = data.data.content.replace(/\\/g, "").replace(/<img/g,
-							"<img style=\"display:none;\"");
+			getDetail() {
+				uni.request({
+					url: 'https://unidemo.dcloud.net.cn/api/news/36kr/' + this.banner.post_id,
+					success: (data) => {
+						if (data.statusCode == 200) {
+							this.htmlString = data.data.content.replace(/\\/g, "").replace(/<img/g,
+								"<img style=\"display:none;\"");
+						}
+					},
+					fail: () => {
+						console.log('fail');
 					}
-				},
-				fail: () => {
-					console.log('fail');
-				}
-			})
-		}
-	},
+				})
+			}
+		},
 	}
 </script>
 
@@ -244,8 +249,8 @@
 			line-height: 84rpx;
 		}
 	}
-	
-	
+
+
 	.buttonBox {
 		width: 91%;
 		margin: 0 auto;
@@ -311,10 +316,20 @@
 		padding: 20 40upx;
 		overflow: hidden;
 		font-size: 30upx;
-		margin:30upx 50upx;
+		margin: 30upx 50upx;
 	}
-	
-	.content{
+
+	.content {
 		white-space: pre-wrap;
+	}
+
+	.Copyright {
+		position: fixed;
+		bottom: 10px;
+		font-family: kaiti;
+		color: #888888;
+		font-size: 13px;
+		text-align: center;
+		width: 100%;
 	}
 </style>
