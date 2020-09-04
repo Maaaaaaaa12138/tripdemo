@@ -32,7 +32,7 @@ public class ItemController {
         if (page == null) {
             items = itemMapper.getItem(0, 10, Objects.requireNonNullElse(location, "北京"));
         } else {
-            items = itemMapper.getItem(page, size, location);
+            items = itemMapper.getItem(page, size, Objects.requireNonNullElse(location, "北京"));
         }
         return ResData.getRes("", items);
     }
