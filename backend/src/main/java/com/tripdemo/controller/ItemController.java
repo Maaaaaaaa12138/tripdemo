@@ -22,8 +22,13 @@ public class ItemController {
     @GetMapping("")
     public String getItems(@RequestParam(value = "page", required = false) Integer page,
                            @RequestParam(value = "size", required = false) Integer size,
-                           @RequestParam(value = "location", required = false) String location) {
+                           @RequestParam(value = "location", required = false) String location,
+                           @RequestParam(value = "name", required = false) String name) {
         List<Item> items;
+        // 根据名字删选的优先级最高
+        if (name != null){
+            return ResData.getRes("", itemMapper.searchItemByName("%"+name+"%"));
+        }
         if (page == null) {
             items = itemMapper.getItem(0, 10, Objects.requireNonNullElse(location, "北京"));
         } else {
