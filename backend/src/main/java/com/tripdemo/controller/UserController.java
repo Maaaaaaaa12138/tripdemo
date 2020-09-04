@@ -99,8 +99,19 @@ public class UserController {
     public String updateUser(@RequestBody User user, HttpServletRequest request){
         String tokenStr = request.getHeader("token");
         MyToken token = userService.getToken(tokenStr);
+        User userOther = null;
         if (token == null || token.getUserId() != user.getId()){
             return ResData.getRes("权限验证失败, 请检查登录状态", "");
+        }
+        // 判断手机号有没有注册
+        userOther = userService.getUserByPhoneNumber(user.getPhoneNumber());
+        if (userOther != null && userOther.getId() != user.getId()) {
+            return ResData.getRes("该手机号已注册", "");
+        }
+        // 判断用户名是否已注册
+        userOther = userService.getUserByUsername(user.getUsername());
+        if (userOther != null && userOther.getId() != user.getId()){
+            return ResData.getRes("该用户名已注册", "");
         }
         boolean res = userService.updateUser(user);
         if (res) {
