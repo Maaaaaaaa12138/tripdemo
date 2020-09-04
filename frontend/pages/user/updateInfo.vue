@@ -3,7 +3,7 @@
 		<!-- 主体表单 -->
 		<view class="main">
 			<view class="logo">
-				<image class="logo-img" :src="domain+avatar"></image>
+				<image class="logo-img" :src="domain+avatar" @tap="choose_img"></image>
 			</view>
 			<view class="item">
 				<image class="login_image" src="/static/login/email.png"></image>
@@ -20,18 +20,27 @@
 				<input class="main-input" type="text" v-model="username" placeholder="请输入用户名" />
 			</view>
 			<view class="btn_login" @click="startUpdate">确认修改</view>
-			<Copyright/>
+			<Copyright />
 		</view>
+		<button @tap="bindOpen">打开窗口</button>
+
+		<neil-modal :show="show" @close="bindClose" title="头像预览" @confirm="bindBtn('confirm')" @cancel="bindBtn('cancel')">
+			<center>
+				<image class="logo-img1" :src="preImage"></image>
+			</center>
+		</neil-modal>
 
 	</view>
 </template>
 
 <script>
 	var _this;
+	import neilModal from '@/components/neil-modal/neil-modal.vue';
 	import Copyright from '@/components/Copyright/Copyright.vue'
 	export default {
 		components: {
-			Copyright
+			Copyright,
+			neilModal
 		},
 		data() {
 			return {
@@ -42,6 +51,9 @@
 				showAgree: false,
 				email: '', //邮箱
 				username: "", //用户名
+				show: false,
+				preImage: "",
+				choose_type: false
 			};
 		},
 		onLoad() {
@@ -51,6 +63,46 @@
 			uni.hideKeyboard()
 		},
 		methods: {
+			bindOpen: function() {
+				this.show = true;
+			},
+			bindClose: function() {
+				this.show = false;
+			},
+			bindBtn: function(type) { //选择确认还是取消
+				if (type == "confirm") {
+					this.choose_type = true;
+					let self = this;
+					if (self.choose_type == true) { //用户选择上传
+						self.choose_type = false;
+						uni.uploadFile({
+							url: getApp().globalData.domain + "/users/avatar/",
+							method: "POST",
+							filePath:self.preImage,
+							name:"file",
+							success: (res) => {
+								console.log(res.data);
+							},
+							fail(res) {
+								console.log(res);
+							}
+						})
+					}
+				}
+			},
+			choose_img: function() {
+				let self = this;
+				uni.chooseImage({
+					sizeType: ['compressed'], //压缩图
+					count: 1, //只可选择一张
+					sourceType: ['album', 'camera'],
+					success: (res) => {
+						console.log(res.tempFilePaths);
+						self.preImage = res.tempFilePaths[0];
+						self.bindOpen();
+					}
+				})
+			},
 			showMsg: function(title) {
 				uni.showToast({
 					title: title,
@@ -150,7 +202,7 @@
 		background-color: #f2f5fa;
 		position: absolute;
 		height: 100%;
-		width:100%;
+		width: 100%;
 		box-sizing: border-box;
 	}
 
@@ -174,10 +226,18 @@
 		margin-bottom: 50px;
 		height: 180upx;
 		padding: 20upx;
-		
+
 	}
 
 	.logo-img {
+		width: 150upx;
+		height: 150upx;
+		border-radius: 150upx;
+	}
+
+	.logo-img1 {
+		margin-top: 20upx;
+		margin-bottom: 20upx;
 		width: 150upx;
 		height: 150upx;
 		border-radius: 150upx;
