@@ -6,6 +6,7 @@
 				<text class="uer-name">Hi，{{login ? userInfo.username : '您未登录'}}</text>
 				<text class="go-login navigat-arrow" v-if="!login">&#xe65e;</text>
 			</view>
+			
 		</view>
 		<view class="center-list">
 			<view class="center-list-item border-bottom" @tap="gotoUpdate">
