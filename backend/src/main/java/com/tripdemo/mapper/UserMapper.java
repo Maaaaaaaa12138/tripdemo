@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Mapper
 public interface UserMapper {
-    @Insert("insert into user(username, password, email, phoneNumber) values" +
-            "(#{username}, #{password}, #{email}, #{phoneNumber})")
+    @Insert("insert into user(username, password, email, phoneNumber, avatar) values" +
+            "(#{username}, #{password}, #{email}, #{phoneNumber}, #{avatar})")
     public void addUser(User user);
 
     @Select("select * from user where id=#{id} or email=#{email}")
