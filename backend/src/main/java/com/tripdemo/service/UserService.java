@@ -19,6 +19,14 @@ public class UserService {
     @Resource
     private VerCodeMapper verCodeMapper;
 
+    public User getUserByUsername(String username){
+        return userMapper.getUserByUsername(username);
+    }
+
+    public User getUserByPhoneNumber(String phoneNumber){
+        return userMapper.getUserByPhoneNumber(phoneNumber);
+    }
+
     public User getUser(int id){
         User user = userMapper.getUser(id, "");
         // 不给前端返回用户密码
@@ -55,6 +63,8 @@ public class UserService {
     public void addUser(User user){
 //        密码加密
         user.setPassword(Tool.getCrpy(user.getPassword()));
+        // 添加默认头像地址
+        user.setAvatar("/static/avatar/logo.jpg");
         userMapper.addUser(user);
     }
 

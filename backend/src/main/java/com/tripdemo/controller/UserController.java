@@ -33,9 +33,19 @@ public class UserController {
                           @RequestParam("email") String email, @RequestParam("phoneNumber") String phoneNumber,
                           @RequestParam("verCode") String verCode) {
 
+        // 判断邮箱是否注册
         if (userService.getUser(email) != null){
             return ResData.getRes("该邮箱已注册", "");
         }
+        // 判断用户名是否注册
+        if (userService.getUserByUsername(username) != null){
+            return ResData.getRes("该用户名已注册", "");
+        }
+        // 判断手机号是否注册
+        if (userService.getUserByPhoneNumber(phoneNumber) != null){
+            return ResData.getRes("该手机号已注册", "");
+        }
+        // 验证码验证成功之后再注册
         if (userService.checkVerCode(email, verCode)){
             User user = new User(username, password, email, 0, phoneNumber, "");
             userService.addUser(user);
