@@ -4,14 +4,24 @@ public class ItemData {
     private String userInfo;
     private String itemInfo;
     private String indentNo;
+    private int indentType;
 
     public ItemData() {
     }
 
-    public ItemData(String userInfo, String itemInfo, String indentNo) {
+    public ItemData(String userInfo, String itemInfo, String indentNo, int indentType) {
         this.userInfo = userInfo;
         this.itemInfo = itemInfo;
         this.indentNo = indentNo;
+        this.indentType = indentType;
+    }
+
+    public int getIndentType() {
+        return indentType;
+    }
+
+    public void setIndentType(int indentType) {
+        this.indentType = indentType;
     }
 
     public String getUserInfo() {

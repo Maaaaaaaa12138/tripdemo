@@ -7,7 +7,7 @@ package com.tripdemo.entity;
 public class Indent {
     private int userId; // foreign key reference(user.id)
     private int itemId; // foreign key reference(item.id)
-    private int type; // 订单状态，0-已提交， 1-已支付，3-已完成
+    private int type; // 订单状态，1-未支付，2-已支付， 3-已完成
     private String indentId; // 订单号，每单唯一识别码
 
     public Indent(){

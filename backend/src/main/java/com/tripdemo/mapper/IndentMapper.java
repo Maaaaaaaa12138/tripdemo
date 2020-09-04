@@ -1,10 +1,7 @@
 package com.tripdemo.mapper;
 
 import com.tripdemo.entity.Indent;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -20,4 +17,7 @@ public interface IndentMapper {
     // 根据订单号删除订单
     @Delete("delete from intent where indentId=#{indentId}")
     public void deleteById(String indentId);
+
+    @Update("update intent set type=#{type} where indentId=#{id}")
+    public void setType(String id, int type);
 }

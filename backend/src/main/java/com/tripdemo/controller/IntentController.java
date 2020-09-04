@@ -70,9 +70,18 @@ public class IntentController {
         for (Indent indent: indents){
             item = itemMapper.getItemById(indent.getItemId());
             itemDataList.add(new ItemData(user.getUsername() + user.getPhoneNumber(),
-                    item.getName(), indent.getIndentId()));
+                    item.getName(), indent.getIndentId(), indent.getType()));
         }
         return ResData.getRes("", itemDataList);
     }
 
+    @PutMapping("/{id}")
+    public String setType(@PathVariable("id") String id, @RequestParam("type") int type) {
+        try {
+            indentMapper.setType(id, type);
+        } catch (Exception e) {
+            return ResData.getRes(e.getMessage(), "");
+        }
+        return ResData.getRes("", "修改成功");
+    }
 }
