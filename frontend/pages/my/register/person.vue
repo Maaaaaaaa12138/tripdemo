@@ -7,20 +7,20 @@
 			<!-- <view class="title_des">个人注册</view> -->
 			<view class="item">
 				<image class="login_image" src="../../../static/login/email.png"></image>
-				<input class="main-input" type="text" v-model="email" placeholder="请输入邮箱"  />
+				<input class="main-input" type="text" v-model="email" placeholder="请输入邮箱" />
 			</view>
 			<view style="margin-top: 8px"></view>
 			<view class="item">
 				<image class="login_image" src="../../../static/login/userName.png"></image>
-				<input class="main-input" type="number" v-model="phoneData" placeholder="请输入手机号"  />
+				<input class="main-input" type="number" v-model="phoneData" placeholder="请输入手机号" />
 			</view>
 			<view style="margin-top: 8px"></view>
 			<view class="item">
 				<image class="login_image" src="../../../static/login/type.png"></image>
-				<input class="main-input" type="text" v-model="username" placeholder="请输入用户名"  />
+				<input class="main-input" type="text" v-model="username" placeholder="请输入用户名" />
 			</view>
 			<view style="margin-top: 8px"></view>
-			
+
 			<view class="item">
 				<image class="login_image" src="../../../static/login/code.png"></image>
 				<view class="type">
@@ -45,6 +45,9 @@
 			<!-- 协议地址 -->
 			<navigator url="/pages/my/xieyi/xieyi" open-type="navigate">《用户服务协议》</navigator>和
 			<navigator url="/pages/my/yingsi/yingsi" open-type="navigate">《用户隐私协议》</navigator>
+		</view>
+		<view class="Copyright">
+			<text>Copyright © 2020 901梦之队 荣誉出品</text>
 		</view>
 	</view>
 </template>
@@ -79,20 +82,19 @@
 			uni.hideKeyboard()
 		},
 		methods: {
-			showMsg: function(title){
+			showMsg: function(title) {
 				uni.showToast({
-					title:title,
-					icon:"none"
+					title: title,
+					icon: "none"
 				})
 			},
-			setCodeTime(){
-				if (!this.codeTime){
+			setCodeTime() {
+				if (!this.codeTime) {
 					this.sendCode = "获取验证码"
 					this.codeTime = 60
-				}
-				else{
+				} else {
 					this.codeTime -= 1;
-					this.sendCode = "重新获取"+this.codeTime+"s";
+					this.sendCode = "重新获取" + this.codeTime + "s";
 					setTimeout(this.setCodeTime, 1000);
 				}
 			},
@@ -104,10 +106,10 @@
 				uni.navigateBack();
 			},
 			sendMsg() {
-				if (this.sendCode != "获取验证码"){
+				if (this.sendCode != "获取验证码") {
 					return;
 				}
-				if (!this.email){
+				if (!this.email) {
 					uni.showToast({
 						title: "请输入邮箱",
 						icon: "none"
@@ -117,20 +119,19 @@
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/users/code",
-					data:{
+					data: {
 						email: self.email
 					},
 					success: (res) => {
-						if (!res.data.mes){
+						if (!res.data.mes) {
 							uni.showToast({
-								title:"验证码已发送"
+								title: "验证码已发送"
 							})
 							self.setCodeTime()
-						}
-						else{
+						} else {
 							uni.showToast({
-								title:"发送失败，请检查邮箱",
-								icon:"none"
+								title: "发送失败，请检查邮箱",
+								icon: "none"
 							})
 						}
 					}
@@ -140,11 +141,11 @@
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/users/",
-					method:"POST",
-					header:{
+					method: "POST",
+					header: {
 						"content-type": "application/x-www-form-urlencoded"
 					},
-					data:{
+					data: {
 						username: self.username,
 						password: self.passData,
 						email: self.email,
@@ -152,25 +153,24 @@
 						verCode: self.code
 					},
 					success: (res) => {
-						if (!res.data.mes){
+						if (!res.data.mes) {
 							uni.showToast({
-								title:"注册成功"
+								title: "注册成功"
 							})
 							uni.navigateBack()
-						}
-						else{
+						} else {
 							this.showMsg(res.data.mes)
 						}
 					}
 				})
 			},
-			
+
 			startRegister() {
-				if (!this.email){
+				if (!this.email) {
 					this.showMsg("请输入邮箱");
 					return;
 				}
-				if (this.phoneData.length !=11) {
+				if (this.phoneData.length != 11) {
 					this.showMsg("请输入正确的手机号");
 					return;
 				}
@@ -190,7 +190,7 @@
 					this.showMsg('密码必须大于6位');
 					return;
 				}
-				if (!this.username){
+				if (!this.username) {
 					this.showMsg("请输入用户名")
 					return;
 				}
@@ -208,10 +208,11 @@
 	@import url('../../../static/css/icon.css');
 	@import url('../../../static/css/main.css');
 
-	.senCode{
+	.senCode {
 		font-size: 14px;
 		color: #3399ff;
 	}
+
 	.title_des {
 		color: #3399ff;
 		font-size: 22px;
@@ -296,5 +297,15 @@
 		font-size: 28 upx;
 		padding-right: 10 upx;
 		margin-left: 20 upx;
+	}
+
+	.Copyright {
+		position: fixed;
+		bottom: 10px;
+		font-family: kaiti;
+		color: #888888;
+		font-size: 13px;
+		text-align: center;
+		width: 100%;
 	}
 </style>

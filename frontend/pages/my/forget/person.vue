@@ -23,6 +23,9 @@
 			</view>
 		</view>
 		<view class="btn_login" @click="startForget">立即找回</view>
+		<view class="Copyright">
+			<text>Copyright © 2020 901梦之队 荣誉出品</text>
+		</view>
 	</view>
 </template>
 
@@ -37,7 +40,7 @@
 				passData: '', //密码
 				showAgree: true,
 				email: '', //企业邮箱
-				code: '' ,//验证码
+				code: '', //验证码
 				codeTime: 60,
 				sendCode: "获取验证码"
 			};
@@ -50,28 +53,27 @@
 			uni.hideKeyboard();
 		},
 		methods: {
-			showMsg: function(title){
+			showMsg: function(title) {
 				uni.showToast({
-					title:title,
-					icon:"none"
+					title: title,
+					icon: "none"
 				})
 			},
-			setCodeTime(){
-				if (!this.codeTime){
+			setCodeTime() {
+				if (!this.codeTime) {
 					this.sendCode = "获取验证码"
 					this.codeTime = 60
-				}
-				else{
+				} else {
 					this.codeTime -= 1;
-					this.sendCode = "重新获取"+this.codeTime+"s";
+					this.sendCode = "重新获取" + this.codeTime + "s";
 					setTimeout(this.setCodeTime, 1000);
 				}
 			},
 			sendMsg() {
-				if (this.sendCode != "获取验证码"){
+				if (this.sendCode != "获取验证码") {
 					return;
 				}
-				if (!this.phoneData){
+				if (!this.phoneData) {
 					uni.showToast({
 						title: "请输入邮箱",
 						icon: "none"
@@ -81,20 +83,19 @@
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/users/code",
-					data:{
+					data: {
 						email: self.phoneData
 					},
 					success: (res) => {
-						if (!res.data.mes){
+						if (!res.data.mes) {
 							uni.showToast({
-								title:"验证码已发送"
+								title: "验证码已发送"
 							})
 							self.setCodeTime()
-						}
-						else{
+						} else {
 							uni.showToast({
-								title:"发送失败，请检查邮箱",
-								icon:"none"
+								title: "发送失败，请检查邮箱",
+								icon: "none"
 							})
 						}
 					}
@@ -111,26 +112,25 @@
 				uni.request({
 					url: getApp().globalData.domain + "/users/password",
 					method: "PUT",
-					header:{
+					header: {
 						"content-type": "application/x-www-form-urlencoded",
 					},
-					data:{
+					data: {
 						email: this.phoneData,
 						verCode: this.code,
 						newPassword: this.passData
 					},
 					success: (res) => {
 						// console.log(res)
-						if (!res.data.mes){
+						if (!res.data.mes) {
 							uni.showToast({
 								title: "密码重置成功",
-								duration:300,
+								duration: 300,
 								success: () => {
 									uni.navigateBack();
 								}
 							})
-						}
-						else{
+						} else {
 							this.showMsg(res.data.mes)
 						}
 					}
@@ -170,11 +170,11 @@
 <style>
 	@import url('../../../static/css/icon.css');
 	@import url('../../../static/css/main.css');
-
-	.senCode{
+	.senCode {
 		font-size: 14px;
 		color: #3399ff;
 	}
+
 	.title_des {
 		color: #0055b8;
 		font-size: 22px;
@@ -260,4 +260,15 @@
 		padding-right: 10 upx;
 		margin-left: 20 upx;
 	}
+	
+	.Copyright{
+		position: fixed;
+		bottom: 10px;
+		font-family: kaiti;
+		color: #888888;
+		font-size: 13px;
+		text-align: center;
+		width: 100%;
+	}	
+	
 </style>

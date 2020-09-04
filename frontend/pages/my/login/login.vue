@@ -26,7 +26,9 @@
 			</view>
 		</view>
 
-
+		<view class="Copyright">
+			<text>Copyright © 2020 901梦之队 荣誉出品</text>
+		</view>
 	</view>
 </template>
 
@@ -207,7 +209,7 @@
 	}
 
 	.title_des {
-		margin:0 auto;
+		margin: 0 auto;
 		font-weight: bold;
 		color: #3399ff;
 		font-size: 22px;
@@ -287,5 +289,15 @@
 		font-size: 28 upx;
 		padding-right: 10 upx;
 		margin-left: 20 upx;
+	}
+
+	.Copyright {
+		position: fixed;
+		bottom: 10px;
+		font-family: kaiti;
+		color: #888888;
+		font-size: 13px;
+		text-align: center;
+		width: 100%;
 	}
 </style>
