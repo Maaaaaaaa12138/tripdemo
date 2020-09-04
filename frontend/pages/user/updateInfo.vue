@@ -19,12 +19,12 @@
 				<image class="login_image" src="/static/login/type.png"></image>
 				<input class="main-input" type="text" v-model="username" placeholder="请输入用户名" />
 			</view>
+			<view class="btn_login" @click="startUpdate">确认修改</view>
+			<view class="Copyright">
+				<text>Copyright © 2020 901梦之队 荣誉出品</text>
+			</view>
+		</view>
 
-		</view>
-		<view class="btn_login" @click="startUpdate">确认修改</view>
-		<view class="Copyright">
-			<text>Copyright © 2020 901梦之队 荣誉出品</text>
-		</view>
 	</view>
 </template>
 
@@ -138,7 +138,20 @@
 
 <style>
 	@import url('/static/css/icon.css');
-	@import url('/static/css/main.css');
+
+	.main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		padding-top: 32upx;
+		padding-left: 70upx;
+		padding-right: 70upx;
+		background-color: #f2f5fa;
+		position: absolute;
+		height: 100%;
+		width:100%;
+		box-sizing: border-box;
+	}
 
 	.senCode {
 		font-size: 14px;
@@ -158,11 +171,9 @@
 	.logo {
 		margin-top: 50px;
 		margin-bottom: 50px;
-		width: 100%;
 		height: 180upx;
 		padding: 20upx;
-		box-sizing: border-box;
-		text-align: center;
+		
 	}
 
 	.logo-img {
@@ -206,6 +217,7 @@
 	.item {
 		line-height: 40px;
 		display: flex;
+		width: 100%;
 	}
 
 	.login_image {
@@ -217,7 +229,7 @@
 	.main-input {
 		font-size: 14px;
 		margin-left: 16px;
-		border-bottom: 1px solid #EEEEEE;
+		border-bottom: 1px solid #acacac;
 		height: 40px;
 		line-height: 40px;
 	}
@@ -238,9 +250,7 @@
 		border-radius: 8px;
 		line-height: 40px;
 		text-align: center;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 45px;
+		margin-top: 70px;
 	}
 
 	.main-input {
