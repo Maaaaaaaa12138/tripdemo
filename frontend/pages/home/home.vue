@@ -74,6 +74,8 @@
 				reload: false,
 				hotItems: [],
 				searchText: "",
+				page: 0, // 页码，从0开始
+				size: 10, // 每页大小，默认10
 			}
 		},
 		onLoad() {
@@ -85,6 +87,9 @@
 				this.renderImage = true;
 			}, 300);
 		},
+		onReachBottom:function(){
+			this.getNextPage()
+		},
 		methods: {
 
 			loadData(action = 'refresh') {
@@ -93,6 +98,7 @@
 					this.productList = [];
 				}
 				let self = this;
+				self.page = 0;
 				uni.request({
 					url: getApp().globalData.domain + "/items",
 					data:{
@@ -108,10 +114,6 @@
 						console.log(res)
 					}
 				})
-
-				// data.forEach(item => {
-				// 	this.productList.push(item);
-				// });
 			},
 
 			getHotItems: function() {
@@ -193,8 +195,43 @@
 						console.log(res)
 					}
 				})
+			},
+		
+			getNextPage: function(){
+				let self = this;
+				uni.request({
+					url: getApp().globalData.domain + "/items",
+					data:{
+						page: self.page + 1,
+						size: self.size,
+						location: self.array[self.index]
+					},
+					success: (res)=>{
+						let data = res.data;
+						// 判断接口返回信息
+						if (data.mes){
+							uni.showToast({
+								title: data.mes,
+								icon: "none"
+							})
+							return;
+						}
+						if (data.data.length){
+							// 如果不为空，添加项目，翻页，提示
+							data.data.forEach(item=>{
+								self.productList.push(item)
+							})	;
+							self.page += 1;
+							uni.showToast({
+								title: "加载成功"
+							})
+						}
+						
+						// console.log(data);
+					}
+				})
 			}
-		},
+		}
 	}
 </script>
 
@@ -356,11 +393,11 @@
 		width: 100%;
 		flex-wrap: wrap;
 		flex-direction: row;
-		justify-content: center;
+		/* justify-content: center; */
 	}
 
 	.uni-product {
-		padding: 15upx;
+		padding: 22upx;
 		/* flex: 50%; */
 		display: flex;
 		flex-direction: column;
