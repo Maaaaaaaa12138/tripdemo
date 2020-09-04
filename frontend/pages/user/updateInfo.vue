@@ -12,16 +12,19 @@
 			<view style="margin-top: 8px"></view>
 			<view class="item">
 				<image class="login_image" src="/static/login/userName.png"></image>
-				<input class="main-input" type="number" v-model="phoneData" placeholder="请输入手机号"  />
+				<input class="main-input" type="number" v-model="phoneData" placeholder="请输入手机号" />
 			</view>
 			<view style="margin-top: 8px"></view>
 			<view class="item">
 				<image class="login_image" src="/static/login/type.png"></image>
-				<input class="main-input" type="text" v-model="username" placeholder="请输入用户名"  />
+				<input class="main-input" type="text" v-model="username" placeholder="请输入用户名" />
 			</view>
-			
+
 		</view>
 		<view class="btn_login" @click="startUpdate">确认修改</view>
+		<view class="Copyright">
+			<text>Copyright © 2020 901梦之队 荣誉出品</text>
+		</view>
 	</view>
 </template>
 
@@ -32,7 +35,7 @@
 		data() {
 			return {
 				//logo图片 base64
-				domain : "http://ftp.12138.site:666",
+				domain: "http://ftp.12138.site:666",
 				avatar: '/static/avatar/logo.jpg',
 				phoneData: '', //电话
 				showAgree: false,
@@ -40,32 +43,32 @@
 				username: "", //用户名
 			};
 		},
-		onLoad(){
+		onLoad() {
 			this.loadData()
 		},
 		destroyed() {
 			uni.hideKeyboard()
 		},
 		methods: {
-			showMsg: function(title){
+			showMsg: function(title) {
 				uni.showToast({
-					title:title,
-					icon:"none"
+					title: title,
+					icon: "none"
 				})
 			},
 			navBack() {
 				uni.navigateBack();
 			},
-			loadData(){
+			loadData() {
 				// 判断是否登录
-				if (!getApp().globalData.isLogin){
+				if (!getApp().globalData.isLogin) {
 					uni.showToast({
 						title: "请登录后再操作",
 						icon: "none",
-						duration:500
+						duration: 500
 					})
-					setTimeout(()=>{
-						// uni.navigateBack()
+					setTimeout(() => {
+						uni.navigateBack()
 					}, 500)
 					return;
 				}
@@ -81,15 +84,15 @@
 					}
 				})
 			},
-			toUpdate(){
+			toUpdate() {
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/users/",
-					method:"PUT",
-					header:{
+					method: "PUT",
+					header: {
 						"token": uni.getStorageSync("token")
 					},
-					data:{
+					data: {
 						id: uni.getStorageSync("userId"),
 						email: self.email,
 						phoneNumber: self.phoneData,
@@ -98,33 +101,32 @@
 					},
 					success: (res) => {
 						let data = res.data;
-						if (data.mes){
+						if (data.mes) {
 							uni.showToast({
 								title: data.mes,
 								icon: "none"
 							})
-						}
-						else{
+						} else {
 							uni.showToast({
 								title: "修改成功"
 							})
 						}
-						setTimeout(()=>{
+						setTimeout(() => {
 							uni.navigateBack();
 						}, 500)
 					}
 				})
 			},
 			startUpdate() {
-				if (!this.email){
+				if (!this.email) {
 					this.showMsg("请输入邮箱");
 					return;
 				}
-				if (this.phoneData.length !=11) {
+				if (this.phoneData.length != 11) {
 					this.showMsg("请输入正确的手机号");
 					return;
 				}
-				if (!this.username){
+				if (!this.username) {
 					this.showMsg("请输入用户名")
 					return;
 				}
@@ -138,18 +140,21 @@
 	@import url('/static/css/icon.css');
 	@import url('/static/css/main.css');
 
-	.senCode{
+	.senCode {
 		font-size: 14px;
 		color: #3399ff;
 	}
-	.email-input{
+
+	.email-input {
 		color: #888888;
 	}
+
 	.title_des {
 		color: #3399ff;
 		font-size: 22px;
 		margin-bottom: 32px;
 	}
+
 	.logo {
 		margin-top: 50px;
 		margin-bottom: 50px;
@@ -159,11 +164,13 @@
 		box-sizing: border-box;
 		text-align: center;
 	}
+
 	.logo-img {
 		width: 150upx;
 		height: 150upx;
 		border-radius: 150upx;
 	}
+
 	.login_icon_wx {
 		color: #999999;
 		border: none;
@@ -242,5 +249,15 @@
 		font-size: 28 upx;
 		padding-right: 10 upx;
 		margin-left: 20 upx;
+	}
+
+	.Copyright {
+		position: fixed;
+		bottom: 10px;
+		font-family: kaiti;
+		color: #888888;
+		font-size: 13px;
+		text-align: center;
+		width: 100%;
 	}
 </style>
