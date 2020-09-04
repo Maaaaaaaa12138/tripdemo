@@ -58,8 +58,8 @@ export default {
 	},
 	methods: {
 		gotoOrderDetail: function(index) {
-			console.log(index);
-			console.log(JSON.stringify(this.list_orders[index]));
+			// console.log(index);
+			// console.log(JSON.stringify(this.list_orders[index]));
 			uni.navigateTo({
 				url: "/pages/order/detail?userInfo=" + this.list_orders[index]["userInfo"] +"&indentNo=" + this.list_orders[index]["indentNo"] + "&itemInfo=" +this.list_orders[index]["itemInfo"]
 			})
