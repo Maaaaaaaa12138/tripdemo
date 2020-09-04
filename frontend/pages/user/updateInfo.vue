@@ -22,7 +22,6 @@
 			<view class="btn_login" @click="startUpdate">确认修改</view>
 			<Copyright />
 		</view>
-		<button @tap="bindOpen">打开窗口</button>
 
 		<neil-modal :show="show" @close="bindClose" title="头像预览" @confirm="bindBtn('confirm')" @cancel="bindBtn('cancel')">
 			<center>
@@ -79,12 +78,23 @@
 							url: getApp().globalData.domain + "/users/avatar/",
 							method: "POST",
 							filePath:self.preImage,
+							header:{
+								token: uni.getStorageSync("token")
+							},
 							name:"file",
 							success: (res) => {
-								console.log(res.data);
+								if (res.data.mes){
+									uni.showToast({
+										title: res.data.mes,
+										icon: "none"
+									})
+									return;
+								}
+								self.avatar = JSON.parse(res.data).data;
+								console.log(self.avatar)
 							},
 							fail(res) {
-								console.log(res);
+								// console.log(res);
 							}
 						})
 					}
