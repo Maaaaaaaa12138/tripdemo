@@ -356,10 +356,12 @@
 		width: 100%;
 		flex-wrap: wrap;
 		flex-direction: row;
+		justify-content: center;
 	}
 
 	.uni-product {
 		padding: 15upx;
+		/* flex: 50%; */
 		display: flex;
 		flex-direction: column;
 	}
