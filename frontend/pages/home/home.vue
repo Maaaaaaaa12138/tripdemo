@@ -19,8 +19,8 @@
 				</view>
 			</block>
 			<view class="input-view">
-				<uni-icons class="input-uni-icon" type="search" size="22" color="#666666" />
-				<input confirm-type="search" class="nav-bar-input" type="text" placeholder="输入旅游目的地" @confirm="confirm">
+				<uni-icons class="input-uni-icon" type="search" size="22" color="#666666" @tap="search"/>
+				<input confirm-type="search" v-model="searchText" class="nav-bar-input" type="text" placeholder="查询旅游项目" @confirm="search">
 			</view>
 		</uni-nav-bar>
 
@@ -72,7 +72,8 @@
 				listData: [],
 				last_id: "",
 				reload: false,
-				hotItems: []
+				hotItems: [],
+				searchText: "",
 			}
 		},
 		onLoad() {
@@ -145,21 +146,42 @@
 				})
 			},
 			search() {
-				uni.showToast({
-					icon:'none',
-					title: '搜索没写'
+				let self = this;
+				if (!self.searchText.length){
+					uni.showToast({
+						title: "查询条件为空",
+						icon:"none",
+						position: "top"
+					})
+					return;
+				}
+				uni.request({
+					url: getApp().globalData.domain + "/items",
+					data: {
+						name: self.searchText,
+					},
+					success: (res) => {
+						self.productList = res.data.data;
+						self.searchText = "";
+						// 隐藏键盘
+						uni.hideKeyboard();
+						uni.showToast({
+							title: "搜索完成",
+							duration: 1000,
+						})
+					},
+					fail: (res) => {
+						uni.showToast({
+							title: "未知错误",
+							icon: "none"
+						})
+					}
 				})
 			},
 
 			showUserInfo() {
 				uni.showToast({
 					title: '显示用户信息'
-				})
-			},
-			confirm() {
-				uni.showToast({
-					icon:'none',
-					title: '搜索没写'
 				})
 			},
 
