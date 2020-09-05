@@ -82,10 +82,22 @@ class Vercode(models.Model):
 class FeedBack(models.Model):
     title = models.CharField(max_length=255, blank=True, null=True)
     content = models.TextField()
-    userId = models.IntegerField()
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="userId")
 
     def __str__(self):
-        return str(self.userId) + "-" + self.title
+        return self.user.username + "-" + self.title
     
     class Meta:
         db_table = "feedback"
+
+class Message(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    content = models.TextField()
+    type1 = models.IntegerField(db_column="type", default=0)
+    user = models.ForeignKey(User, models.DO_NOTHING, db_column="userId")
+
+    def __str__(self):
+        return self.user.username + "-" + self.title
+
+    class Meta:
+        db_table = "message"

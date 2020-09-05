@@ -13,7 +13,8 @@ import java.io.IOException;
 
 @WebFilter(value = {"/indents/*",
         "/users/avatar/*",
-        "/feedbacks/*"})
+        "/feedbacks/*",
+        "/messages/*"})
 public class LoginRequired implements Filter {
 //    @Autowired
     @Resource
