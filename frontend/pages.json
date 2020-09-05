@@ -92,10 +92,6 @@
 				}, {
 			"path": "pages/detail/detail",
 			"style": {}
-		},
-		{
-			"path": "pages/order/changan",
-			"style": {}
 		}
 	    ,{
             "path" : "pages/order/detail",

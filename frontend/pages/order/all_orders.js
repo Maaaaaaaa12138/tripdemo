@@ -63,14 +63,15 @@ export default {
 			uni.navigateTo({
 				url: "/pages/order/detail?userInfo=" + this.list_orders[index]["userInfo"] + "&indentNo=" + this.list_orders[
 					index]["indentNo"] + "&itemInfo=" + this.list_orders[index]["itemInfo"]
+					+"&indentType="+this.list_orders[index]['indentType']
 			})
 		},
 		geturl: function(item_orders) {
 			if (item_orders.indentType == '1') {
 				return "/static/all_orders/images/all_orders_6_6.jpg"
-			}else if(item_orders.indentType == '2'){
+			} else if (item_orders.indentType == '2') {
 				return "/static/all_orders/images/all_orders_6_7.jpg"
-			}else{
+			} else {
 				return "/static/all_orders/images/all_orders_6_8.jpg"
 			}
 		},
@@ -104,7 +105,8 @@ export default {
 						return;
 					}
 					if (!data.mes) {
-						self.list_orders = res.data.data
+						self.list_orders = res.data.data;
+						// console.log(JSON.stringify(self.list_orders));
 						return;
 					}
 					uni.showToast({
