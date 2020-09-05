@@ -23,7 +23,7 @@
 							<text decode="true" class="orderNo">{{item_orders.indentNo}}</text>
 						</view>
 					</view>
-					<image v-on:click="all_orders_6_6_click(item_orders)" src="/static/all_orders/images/all_orders_6_7.jpg" mode="scaleToFill"
+					<image v-on:click="all_orders_6_6_click(item_orders)" :src="geturl(item_orders)" mode="scaleToFill"
 					 border="0" class="all_orders_6"></image>
 				</view>
 			</view>

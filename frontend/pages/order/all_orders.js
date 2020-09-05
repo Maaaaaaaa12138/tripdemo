@@ -11,7 +11,7 @@ export default {
 		return {
 			loadingText: '',
 			list_orders: [],
-			null_orders:[],
+			null_orders: [],
 			page: 0, //当前分页页码
 			apiUrl: '', //后端接口地址
 			id: '', //传值使用,方便存在本地的locakStorage
@@ -61,8 +61,18 @@ export default {
 			// console.log(index);
 			// console.log(JSON.stringify(this.list_orders[index]));
 			uni.navigateTo({
-				url: "/pages/order/detail?userInfo=" + this.list_orders[index]["userInfo"] +"&indentNo=" + this.list_orders[index]["indentNo"] + "&itemInfo=" +this.list_orders[index]["itemInfo"]
+				url: "/pages/order/detail?userInfo=" + this.list_orders[index]["userInfo"] + "&indentNo=" + this.list_orders[
+					index]["indentNo"] + "&itemInfo=" + this.list_orders[index]["itemInfo"]
 			})
+		},
+		geturl: function(item_orders) {
+			if (item_orders.indentType == '1') {
+				return "/static/all_orders/images/all_orders_6_6.jpg"
+			}else if(item_orders.indentType == '2'){
+				return "/static/all_orders/images/all_orders_6_7.jpg"
+			}else{
+				return "/static/all_orders/images/all_orders_6_8.jpg"
+			}
 		},
 		refresh: function() {
 			// 判断登录状态
