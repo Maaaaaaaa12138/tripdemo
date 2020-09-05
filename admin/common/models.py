@@ -91,6 +91,7 @@ class FeedBack(models.Model):
         db_table = "feedback"
 
 class Message(models.Model):
+    id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=255, blank=True, null=True)
     content = models.TextField()
     type1 = models.IntegerField(db_column="type", default=0)

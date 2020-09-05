@@ -19,4 +19,7 @@ public interface MessageMapper {
     @Delete("delete from message where id=#{id}")
     public void deleteMes(int id);
 
+    @Select("select * from message where id=#{id}")
+    public Message getMesById(int id);
+
 }

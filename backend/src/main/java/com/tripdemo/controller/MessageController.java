@@ -1,5 +1,6 @@
 package com.tripdemo.controller;
 
+import com.tripdemo.entity.Message;
 import com.tripdemo.mapper.MessageMapper;
 import com.tripdemo.response.ResData;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,12 @@ public class MessageController {
     }
 
     @PutMapping("/{id}")
-    private String readMes(@PathVariable("id") int id){
+    private String readMes(@PathVariable("id") int id, HttpServletRequest request) {
+        int userId = (int) request.getAttribute("userId");
+        Message message = messageMapper.getMesById(id);
+        if (message.getUserId() != userId){
+            return ResData.getRes("权限验证失败", "");
+        }
         try {
             messageMapper.readMes(id);
         } catch (Exception e) {
@@ -30,7 +36,12 @@ public class MessageController {
     }
 
     @DeleteMapping("/{id}")
-    private String deleteMes(@PathVariable("id") int id) {
+    private String deleteMes(@PathVariable("id") int id, HttpServletRequest request) {
+        int userId = (int) request.getAttribute("userId");
+        Message message = messageMapper.getMesById(id);
+        if (message.getUserId() != userId){
+            return ResData.getRes("权限验证失败", "");
+        }
         try {
             messageMapper.deleteMes(id);
         } catch (Exception e) {
