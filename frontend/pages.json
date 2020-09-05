@@ -9,9 +9,6 @@
 				}
 			}
 		}, {
-			"path": "pages/index/test",
-			"style": {}
-		}, {
 			"path": "pages/home/home",
 			"style": {
 				"navigationBarTitleText": "主页",
@@ -30,81 +27,82 @@
 			}
 		},
 		{
-					"path": "pages/my/login/login",
-					"style": {
-						"navigationBarTitleText": "登录",
-						"navigationBarTextStyle": "white",
-						"enablePullDownRefresh": false,
-						"app-plus": {
-							"bounce": "none",
-							"scrollIndicator": "none"
-							// "titleNView": false
-						}
-					}
-				},
-				{
-					"path": "pages/my/register/person",
-					"style": {
-						"navigationBarTitleText": "个人注册"
-					}
-				},
-				{
-					"path": "pages/my/forget/person",
-					"style": {
-						"navigationBarTitleText": "忘记密码"
-					}
-				},
-				{
-					"path": "pages/my/register/select",
-					"style": {
-						"navigationBarTitleText": "角色选择"
-					}
-				},
-				{
-					"path": "pages/my/xieyi/xieyi",
-					"style": {
-						"navigationBarTitleText": "服务协议"
-					}
-				},
-				{
-					"path": "pages/my/yingsi/yingsi",
-					"style": {
-						"navigationBarTitleText": "隐私政策"
-					}
-				},
-				{
-				    "path" : "pages/my/aboutapp/aboutapp",
-				    "style" : {
-						"navigationBarTitleText": "关于应用"
-					}
-				},
-				{
-				    "path" : "pages/my/newinformation/newinformation",
-				    "style" : {
-						"navigationBarTitleText": "新消息通知"
-					}
-				},
-				{
-				    "path" : "pages/my/help/help",
-				    "style" : {
-						"navigationBarTitleText": "帮助与反馈"
-					}
-				}, {
+			"path": "pages/my/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"app-plus": {
+					"bounce": "none",
+					"scrollIndicator": "none"
+					// "titleNView": false
+				}
+			}
+		},
+		{
+			"path": "pages/my/register/person",
+			"style": {
+				"navigationBarTitleText": "个人注册"
+			}
+		},
+		{
+			"path": "pages/my/forget/person",
+			"style": {
+				"navigationBarTitleText": "忘记密码"
+			}
+		},
+		{
+			"path": "pages/my/register/select",
+			"style": {
+				"navigationBarTitleText": "角色选择"
+			}
+		},
+		{
+			"path": "pages/my/xieyi/xieyi",
+			"style": {
+				"navigationBarTitleText": "服务协议"
+			}
+		},
+		{
+			"path": "pages/my/yingsi/yingsi",
+			"style": {
+				"navigationBarTitleText": "隐私政策"
+			}
+		},
+		{
+			"path": "pages/my/aboutapp/aboutapp",
+			"style": {
+				"navigationBarTitleText": "关于应用"
+			}
+		},
+		{
+			"path": "pages/my/newinformation/newinformation",
+			"style": {
+				"navigationBarTitleText": "新消息通知"
+			}
+		},
+		{
+			"path": "pages/my/help/help",
+			"style": {
+				"navigationBarTitleText": "帮助与反馈"
+			}
+		}, {
 			"path": "pages/detail/detail",
 			"style": {}
-		}
-	    ,{
-            "path" : "pages/order/detail",
-            "style" : {"navigationBarTitleText": "订单详情"}
-        }
-        
-        ,{
-            "path" : "pages/user/updateInfo",
-            "style" : {
-				"navigationBarTitleText":"账号管理"
+		}, {
+			"path": "pages/order/detail",
+			"style": {
+				"navigationBarTitleText": "订单详情"
 			}
-        }
-    ],
+		}
+
+		, {
+			"path": "pages/user/updateInfo",
+			"style": {
+				"navigationBarTitleText": "账号管理"
+			}
+		}
+	],
 	"tabBar": {
 		"color": "#7A7E83",
 		"selectedColor": "#0055b8",
