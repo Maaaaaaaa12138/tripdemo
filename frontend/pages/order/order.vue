@@ -7,14 +7,14 @@
 				<view v-for="(item_orders, index) in list_orders" :key="index" class="item" >
 					<view class="all_orders_5" @tap="gotoOrderDetail(index)">
 						<view class="all_orders_7">
-							<image v-on:click="all_orders_8_8_click(item_orders)" src="/static/all_orders/images/all_orders_8_8.jpg" mode="scaleToFill"
+							<image src="/static/all_orders/images/all_orders_8_8.jpg" mode="scaleToFill"
 							 border="0" class="all_orders_8"></image>
 							<text decode="true" class="address_from">{{item_orders.userInfo}}</text>
 						</view>
-						<image v-on:click="all_orders_10_10_click(item_orders)" src="/static/all_orders/images/all_orders_10_10.jpg" mode="scaleToFill"
+						<image src="/static/all_orders/images/all_orders_10_10.jpg" mode="scaleToFill"
 						 border="0" class="all_orders_10"></image>
 						<view class="all_orders_11">
-							<image v-on:click="all_orders_12_12_click(item_orders)" src="/static/all_orders/images/all_orders_12_12.jpg"
+							<image src="/static/all_orders/images/all_orders_12_12.jpg"
 							 mode="scaleToFill" border="0" class="all_orders_12"></image>
 							<text decode="true" class="address_to">{{item_orders.itemInfo}}</text>
 						</view>
@@ -23,7 +23,7 @@
 							<text decode="true" class="orderNo">{{item_orders.indentNo}}</text>
 						</view>
 					</view>
-					<image v-on:click="all_orders_6_6_click(item_orders)" :src="geturl(item_orders)" mode="scaleToFill"
+					<image :src="geturl(item_orders)" mode="scaleToFill"
 					 border="0" class="all_orders_6"></image>
 				</view>
 			</view>
