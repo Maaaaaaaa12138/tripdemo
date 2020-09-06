@@ -6,17 +6,36 @@ public class Message {
     private int userId;
     private String title;
     private String content;
+    private int fromId;
     private int type; // 消息状态 0-未读，1-已读
+    private String fromAvatar;
 
     public Message() {
     }
 
-    public Message(int id, int userId, String title, String content, int type) {
+    public Message(int id, int userId, String title, String content, int fromId, int type) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.content = content;
+        this.fromId = fromId;
         this.type = type;
+    }
+
+    public String getFromAvatar() {
+        return fromAvatar;
+    }
+
+    public void setFromAvatar(String fromAvatar) {
+        this.fromAvatar = fromAvatar;
+    }
+
+    public int getFromId() {
+        return fromId;
+    }
+
+    public void setFromId(int fromId) {
+        this.fromId = fromId;
     }
 
     public int getType() {

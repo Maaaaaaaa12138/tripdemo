@@ -10,7 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface MessageMapper {
-    @Select("select * from message where userId=#{userId}")
+    @Select("select * from message where userId=#{userId} order by id desc")
     public List<Message> getAll(int userId);
 
     @Update("update message set type=1 where id=#{id}")
