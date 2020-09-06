@@ -78,7 +78,9 @@
 		{
 			"path": "pages/my/newinformation/newinformation",
 			"style": {
-				"navigationBarTitleText": "新消息通知"
+				"navigationBarTitleText": "新消息通知",
+				"enablePullDownRefresh": true
+				
 			}
 		},
 		{

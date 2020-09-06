@@ -45,7 +45,7 @@ class Token(models.Model):
     createtime = models.IntegerField(db_column='createTime', blank=True, null=True)  # Field name made lowercase.
 
     def __str__(self):
-        return self.content
+        return self.userid.username
 
     class Meta:
         managed = True
@@ -91,11 +91,12 @@ class FeedBack(models.Model):
         db_table = "feedback"
 
 class Message(models.Model):
-    id = models.IntegerField(primary_key=True)
+    # id = models.IntegerField(primary_key=True, auto_created=True)
     title = models.CharField(max_length=255, blank=True, null=True)
     content = models.TextField()
     type1 = models.IntegerField(db_column="type", default=0)
     user = models.ForeignKey(User, models.DO_NOTHING, db_column="userId")
+    from_user = models.ForeignKey(User, models.DO_NOTHING, db_column="fromId", related_name="fromUser")
 
     def __str__(self):
         return self.user.username + "-" + self.title
