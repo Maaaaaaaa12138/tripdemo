@@ -71,9 +71,9 @@
 					success: function(res) {
 						let data = res.data;
 						if (data.mes) {
-							uni.showToast({
-								title: data.mes,
-								icon: "none"
+							uni.showModal({
+								content: data.mes,
+								showCancel:false
 							})
 						} else {
 							getApp().globalData.isLogin = true;
