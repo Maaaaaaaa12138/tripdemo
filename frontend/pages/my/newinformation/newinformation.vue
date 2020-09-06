@@ -189,7 +189,7 @@
 	}
 	
 	.notRead{
-		box-shadow: 2px 2px 6px rgba(255, 0,0, .2), -2px -2px 6px rgba(255, 0,0, .2);
+		box-shadow: 2px 2px 6px rgba(255, 0,0, .3), -2px -2px 6px rgba(255, 0,0, .3);
 	}
 
 	.container {
