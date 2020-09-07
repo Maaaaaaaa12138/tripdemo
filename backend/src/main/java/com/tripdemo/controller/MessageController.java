@@ -20,7 +20,7 @@ public class MessageController {
     private UserService userService;
 
     @GetMapping("")
-    private String getAll(HttpServletRequest request){
+    public String getAll(HttpServletRequest request){
         int userId = (int) request.getAttribute("userId");
         List<Message> messages = messageMapper.getAll(userId);
         for (Message message : messages){
@@ -30,7 +30,7 @@ public class MessageController {
     }
 
     @PutMapping("/{id}")
-    private String readMes(@PathVariable("id") int id, HttpServletRequest request) {
+    public String readMes(@PathVariable("id") int id, HttpServletRequest request) {
         int userId = (int) request.getAttribute("userId");
         Message message = messageMapper.getMesById(id);
         if (message.getUserId() != userId){
@@ -45,7 +45,7 @@ public class MessageController {
     }
 
     @DeleteMapping("/{id}")
-    private String deleteMes(@PathVariable("id") int id, HttpServletRequest request) {
+    public String deleteMes(@PathVariable("id") int id, HttpServletRequest request) {
         int userId = (int) request.getAttribute("userId");
         Message message = messageMapper.getMesById(id);
         if (message.getUserId() != userId){
@@ -55,6 +55,23 @@ public class MessageController {
             messageMapper.deleteMes(id);
         } catch (Exception e) {
             return ResData.getRes(e.getMessage(), "");
+        }
+        return ResData.getRes("", "ok");
+    }
+
+    // 添加消息
+    @PostMapping("/")
+    public String addMessage(@RequestParam("content") String content, @RequestParam("toId") int toId, HttpServletRequest request){
+        try {
+            int userId = (int) request.getAttribute("userId");
+            Message message = new Message();
+            message.setContent(content);
+            message.setTitle(userService.getUser(userId).getUsername());
+            message.setFromId(userId);
+            message.setUserId(toId);
+            messageMapper.addMes(message);
+        } catch (Exception e) {
+            return ResData.getRes("未知错误", "");
         }
         return ResData.getRes("", "ok");
     }

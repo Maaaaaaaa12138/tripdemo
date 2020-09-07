@@ -1,10 +1,7 @@
 package com.tripdemo.mapper;
 
 import com.tripdemo.entity.Message;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -21,5 +18,9 @@ public interface MessageMapper {
 
     @Select("select * from message where id=#{id}")
     public Message getMesById(int id);
+
+    @Insert("insert into message (userId, title, content, fromId, type) " +
+            "values(#{userId}, #{title}, #{content}, #{fromId}, #{type})")
+    public void addMes(Message message);
 
 }
