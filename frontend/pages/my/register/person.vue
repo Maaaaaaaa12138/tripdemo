@@ -158,7 +158,9 @@
 							uni.showToast({
 								title: "注册成功"
 							})
-							uni.navigateBack()
+							setTimeout(()=>{
+								uni.navigateBack()
+							}, 500)
 						} else {
 							this.showMsg(res.data.mes)
 						}

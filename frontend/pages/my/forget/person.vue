@@ -127,7 +127,9 @@
 								title: "密码重置成功",
 								duration: 300,
 								success: () => {
-									uni.navigateBack();
+									setTimeout(()=>{
+										uni.navigateBack();
+									}, 500)
 								}
 							})
 						} else {
