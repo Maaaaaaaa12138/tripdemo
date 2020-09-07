@@ -1,8 +1,10 @@
 package com.tripdemo.service;
 
 import com.tripdemo.entity.MyToken;
+import com.tripdemo.entity.PasswordWrong;
 import com.tripdemo.entity.User;
 import com.tripdemo.entity.VerCode;
+import com.tripdemo.mapper.PasswordWrongMapper;
 import com.tripdemo.mapper.UserMapper;
 import com.tripdemo.mapper.VerCodeMapper;
 import com.tripdemo.tool.Tool;
@@ -18,6 +20,9 @@ public class UserService {
 
     @Resource
     private VerCodeMapper verCodeMapper;
+
+    @Resource
+    private PasswordWrongMapper passwordWrongMapper;
 
     public User getUserByUsername(String username){
         return userMapper.getUserByUsername(username);
@@ -135,6 +140,7 @@ public class UserService {
         return content;
     }
 
+    // 更新用户信息
     public boolean updateUser(User user){
         try {
             userMapper.updateUser(user);
@@ -142,5 +148,36 @@ public class UserService {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    // 验证用户状态
+    public boolean isActive(int userId){
+        PasswordWrong passwordWrong = passwordWrongMapper.getByUser(userId);
+        return passwordWrong == null || passwordWrong.getWrongTimes() < 5
+                || System.currentTimeMillis() / 1000 - passwordWrong.getUpdateTime() >= 30 * 60;
+    }
+
+    // 更新密码错误次数
+    public int updateWrongTimes(int userId) {
+        PasswordWrong passwordWrong;
+        passwordWrong  = passwordWrongMapper.getByUser(userId);
+        int wrongTimes = 1;
+        // 如果为空，增加新的
+        if (passwordWrong == null) {
+            passwordWrong = new PasswordWrong(1, userId, 1, Math.toIntExact(System.currentTimeMillis() / 1000));
+            passwordWrongMapper.add(passwordWrong);
+        }
+        // 不为空则更新错误次数
+        else {
+            wrongTimes = passwordWrong.getWrongTimes() + 1;
+            passwordWrong.setWrongTimes(wrongTimes);
+            passwordWrongMapper.update(passwordWrong);
+        }
+        return wrongTimes;
+    }
+
+    // 登录成功之后删除错误记录
+    public void deleteWrongRecord(int userId) {
+        passwordWrongMapper.delete(userId);
     }
 }

@@ -103,3 +103,14 @@ class Message(models.Model):
 
     class Meta:
         db_table = "message"
+
+class PasswordWrong(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="user")
+    wrongTimes = models.IntegerField()
+    updateTime = models.IntegerField()
+
+    def __str__(self):
+        return self.user.username
+    
+    class Meta:
+        db_table = "passwordWrong"

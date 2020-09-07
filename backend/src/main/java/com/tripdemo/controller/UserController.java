@@ -1,13 +1,11 @@
 package com.tripdemo.controller;
 
-import com.sun.el.parser.Token;
-import com.tripdemo.entity.LoginData;
+import com.tripdemo.response.LoginData;
 import com.tripdemo.entity.MyToken;
 import com.tripdemo.entity.User;
 import com.tripdemo.response.ResData;
 import com.tripdemo.service.UserService;
 import com.tripdemo.tool.Tool;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,8 +13,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("users")
@@ -69,11 +65,25 @@ public class UserController {
     @PostMapping("/auth")
     public String login(@RequestParam("identify") String identify, @RequestParam("password") String password){
         User user = userService.getUser(identify);
-       // 判断密码是否正确
+        // 判断用户状态
+        if (user != null) {
+            if (!userService.isActive(user.getId())) {
+                return ResData.getRes("该账号已被冻结，请半小时后再试", "");
+            }
+        }
+
+        // 判断密码是否正确
         if (user != null && userService.checkPassword(user.getId(), password)) {
+            // 登录成功之后删除错误记录
+            userService.deleteWrongRecord(user.getId());
             return ResData.getRes("", new LoginData(user.getId(), userService.setToken(user.getId())));
         }
-        return ResData.getRes("邮箱或密码错误", "");
+        // 更新错误次数
+        if (user != null) {
+            int wrongTimes = userService.updateWrongTimes(user.getId());
+            return ResData.getRes(String.format("当前密码已错%d次，连续错误达5次账号将被锁定!!!", wrongTimes), "");
+        }
+        return ResData.getRes("该账号未找到", "");
     }
 
 //    @RequestMapping("/resetPassword")

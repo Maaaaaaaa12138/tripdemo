@@ -1,4 +1,4 @@
-package com.tripdemo.entity;
+package com.tripdemo.response;
 
 public class LoginData {
     private int id; // 用户id
