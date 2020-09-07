@@ -26,7 +26,8 @@
 					<swiper-item class="swiperItem" v-for="(item,index) in swiperTabList" :key='index'>
 						<!-- 简介 -->
 						<view v-if="index==0" class="swiper-content">
-							<center><h2>景区简介</h2>{{htmlString}}</center>
+							<view class="info-title">景区简介</view>
+							<view class="info-content">{{htmlString}}</view>
 						</view>
 						<!-- 评论列表与添加评论 -->
 						<view v-if="index==1" class="swiper-comment">
@@ -38,7 +39,7 @@
 									<image class="user-head" :src="g_url+info['userAvatar']" @tap="leaveMessage(flag)"></image>
 								</view>
 								<view class="col-right" @tap="viewComment(flag)">
-									<view class="c-title">{{getLocalTime(info['createTime'])}} {{info['username']}}</view>
+									<view class="c-title">{{getLocalTime(info['createTime'])}} {{info['username']}}: </view>
 									<view class="c-content">{{info['content']}}</view>
 								</view>
 							</view>
@@ -50,9 +51,9 @@
 		</view>
 		<!-- end -->
 		<neil-modal :show="show" @close="bindClose(1)" title="添加评论" @confirm="bindBtn(1)" cancelText="取消" confirmText="提交">
-			<input v-model="commentText" type="text" placeholder="请填写你的评论内容" />
+			<textarea style="padding: 15px;" v-model="commentText" type="text" placeholder="请填写你的评论内容" />
 		</neil-modal>
-		<neil-modal :show="show1" v-if="comments.length!=0" @close="bindClose(2)" title="留言详情" @confirm="bindBtn(2)"
+		<neil-modal :show="show1" v-if="comments.length!=0" @close="bindClose(2)" title="评论详情" @confirm="bindBtn(2)"
 		 :showCancel="false">
 			<view class="view-content">{{comments[commentFlag].content}}</view>
 		</neil-modal>
@@ -158,7 +159,8 @@
 				this.commentFlag = flag;
 			},
 			getLocalTime: function(nS) {
-				return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+				let time = new Date(nS*1000)
+				return time.getFullYear() + "-" + (time.getMonth() - 0 + 1) + "-" + time.getDate() + " " + time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds()
 			},
 			//添加评论
 			writeComment: function() {
@@ -244,7 +246,7 @@
 						token: uni.getStorageSync("token"),
 					},
 					success: (res) => {
-						console.log(res);
+						// console.log(res);
 						self.comments = res.data.data;
 					},
 					fail: (res) => {
@@ -533,15 +535,6 @@
 		// padding-top: 70rpx;
 	}
 
-	// /* #ifdef H5 */
-	// .swiperHead {
-	// 	// position: fixed;
-	// 	top: 44px;
-	// 	z-index: 10;
-	// 	width: 100%;
-	// 	background: #FFFFFF;
-	// }
-
 	/* #endif */
 
 	.swiper {
@@ -554,11 +547,20 @@
 		line-height: 400rpx;
 		overflow: auto;
 		background: rgba(0, 0, 0, 0);
-		text-align: center;
 		color: #FFFFFF;
 		font-size: 30upx;
 	}
 
+	.info-title{
+		font-size: 45upx;
+		text-align: center;
+		font-weight: 700;
+		margin-bottom: 10px;
+		
+	}
+	.info-content{
+		white-space: pre-wrap;
+	}
 	.swiperItem image {
 		width: 85%;
 		height: 72%;
@@ -568,16 +570,14 @@
 
 	/*自定义*/
 	.swiper-content {
-		text-align: center;
 		padding: 20 40upx;
-		overflow: scroll;
+		overflow-y: scroll;
 		font-size: 30upx;
 		margin: 30upx 50upx;
 		color: black;
 	}
 
 	.swiper-user {
-		text-align: center;
 		padding: 20 40upx;
 		overflow: scroll;
 		font-size: 30upx;
@@ -588,10 +588,11 @@
 	.swiper-comment {
 		white-space: pre-wrap;
 		text-align: left;
-		padding: 20 40upx;
+		padding: 25px;
+		// padding: 20 40upx;
 		overflow: scroll;
 		font-size: 30upx;
-		margin: 30upx 50upx;
+		// margin: 30upx 50upx;
 		color: black;
 	}
 
@@ -622,6 +623,7 @@
 	.col-right {
 		margin-top: 8px;
 		flex: 80%;
+		max-width: 75%;
 		z-index: 1;
 		/* height: 50upx; */
 	}
@@ -636,12 +638,18 @@
 
 	.c-content {
 		margin-top: 8px;
-		flex: 80%;
+		// flex: 80%;
 		z-index: 1;
+		width: 90%;
+		text-overflow: ellipsis;
+		overflow-x: hidden;
 		/* height: 50upx; */
 	}
 
 	.view-content {
-		overflow: scroll;
+		word-wrap:break-word; 
+		word-break:break-all;
+		padding: 15px;
+		overflow-y: scroll;
 	}
 </style>
