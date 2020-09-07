@@ -15,7 +15,7 @@ import java.io.IOException;
         "/users/avatar/*",
         "/feedbacks/*",
         "/messages/*",
-        "/commits/"})
+        "/comments/"})
 public class LoginRequired implements Filter {
 //    @Autowired
     @Resource

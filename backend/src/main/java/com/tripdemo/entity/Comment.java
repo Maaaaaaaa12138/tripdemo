@@ -1,6 +1,6 @@
 package com.tripdemo.entity;
 
-public class Commit {
+public class Comment {
     private int id;
     private int user;
     private int item;
@@ -9,10 +9,10 @@ public class Commit {
     private String userAvatar;
     private String username;
 
-    public Commit() {
+    public Comment() {
     }
 
-    public Commit(int id, int user, int item, int createTime, String content, String userAvatar) {
+    public Comment(int id, int user, int item, int createTime, String content, String userAvatar) {
         this.id = id;
         this.user = user;
         this.item = item;
