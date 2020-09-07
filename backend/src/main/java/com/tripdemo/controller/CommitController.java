@@ -1,6 +1,7 @@
 package com.tripdemo.controller;
 
 import com.tripdemo.entity.Commit;
+import com.tripdemo.entity.User;
 import com.tripdemo.mapper.CommitMapper;
 import com.tripdemo.response.ResData;
 import com.tripdemo.service.UserService;
@@ -22,9 +23,12 @@ public class CommitController {
     @GetMapping("")
     public String getCommits(@RequestParam("itemId") int itemId) {
         List<Commit> commits = commitMapper.getCommit(itemId);
+        User user;
         // 给每条评论添加用户头像
         for (Commit commit : commits) {
-            commit.setUserAvatar(userService.getUser(commit.getUser()).getAvatar());
+            user = userService.getUser(commit.getUser());
+            commit.setUserAvatar(user.getAvatar());
+            commit.setUsername(user.getUsername());
         }
         return ResData.getRes("", commits);
     }

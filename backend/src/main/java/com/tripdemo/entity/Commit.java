@@ -7,6 +7,7 @@ public class Commit {
     private int createTime;
     private String content;
     private String userAvatar;
+    private String username;
 
     public Commit() {
     }
@@ -18,6 +19,14 @@ public class Commit {
         this.createTime = createTime;
         this.content = content;
         this.userAvatar = userAvatar;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getId() {
