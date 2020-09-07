@@ -66,7 +66,7 @@ public class MessageController {
             int userId = (int) request.getAttribute("userId");
             Message message = new Message();
             message.setContent(content);
-            message.setTitle(userService.getUser(userId).getUsername());
+            message.setTitle("From:" + userService.getUser(userId).getUsername());
             message.setFromId(userId);
             message.setUserId(toId);
             messageMapper.addMes(message);
