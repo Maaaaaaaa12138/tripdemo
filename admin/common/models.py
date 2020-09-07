@@ -114,3 +114,15 @@ class PasswordWrong(models.Model):
     
     class Meta:
         db_table = "passwordWrong"
+
+class Commit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="user")
+    content = models.TextField()
+    createTime = models.IntegerField()
+    item = models.ForeignKey(Item, on_delete=models.DO_NOTHING, db_column="item")
+
+    def __str__(self):
+        return self.user.username + "-" + self.item.name
+    
+    class Meta:
+        db_table = "commit"

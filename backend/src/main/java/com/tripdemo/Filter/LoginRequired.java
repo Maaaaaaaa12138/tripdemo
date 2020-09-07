@@ -14,7 +14,8 @@ import java.io.IOException;
 @WebFilter(value = {"/indents/*",
         "/users/avatar/*",
         "/feedbacks/*",
-        "/messages/*"})
+        "/messages/*",
+        "/commits/"})
 public class LoginRequired implements Filter {
 //    @Autowired
     @Resource
