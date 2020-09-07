@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface CommentMapper {
-    @Select("select * from comment where item=#{item}")
+    @Select("select * from comment where item=#{item} order by id desc")
     public List<Comment> getCommit(int item);
 
     @Insert("insert into comment(user, item, createTime, content) " +
