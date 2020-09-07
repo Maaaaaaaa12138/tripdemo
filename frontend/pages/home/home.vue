@@ -19,7 +19,7 @@
 				</view>
 			</block>
 			<view class="input-view">
-				<uni-icons class="input-uni-icon" type="search" size="22" color="#666666" @tap="search"/>
+				<uni-icons class="input-uni-icon" type="search" size="22" color="#666666" @tap="search" />
 				<input confirm-type="search" v-model="searchText" class="nav-bar-input" type="text" placeholder="查询旅游项目" @confirm="search">
 			</view>
 		</uni-nav-bar>
@@ -79,15 +79,31 @@
 			}
 		},
 		onLoad() {
-
 			// console.log(getApp(	).globalData.domain)
-			this.loadData();
 			this.getHotItems();
 			setTimeout(() => {
 				this.renderImage = true;
 			}, 300);
+			//获取此时定位
+			let _self = this;
+			uni.getLocation({
+				type: 'wgs84',
+				geocode: 'true',
+				success: function(res) {
+					//console.log('当前位置的省市：' + res.address.city.substr(0,res.address.city.length-1));
+					let i;
+					for (i = 0; i < 9; i++) {
+						if (res.address.city.substr(0,res.address.city.length-1) == _self.array[i]) {
+							//返回的数据带一个市字，用方法去掉后进行比较,若不在预设城市群中默认为北京市
+							_self.index = i;
+						}
+					}
+					//console.log('当前位置的省市：' + _self.array[_self.index]);
+					_self.loadData();//确定城市后获取使用列表
+				}
+			});
 		},
-		onReachBottom:function(){
+		onReachBottom: function() {
 			this.getNextPage()
 		},
 		methods: {
@@ -101,7 +117,7 @@
 				self.page = 0;
 				uni.request({
 					url: getApp().globalData.domain + "/items",
-					data:{
+					data: {
 						location: self.array[self.index]
 					},
 					success: (res) => {
@@ -149,10 +165,10 @@
 			},
 			search() {
 				let self = this;
-				if (!self.searchText.length){
+				if (!self.searchText.length) {
 					uni.showToast({
 						title: "查询条件为空",
-						icon:"none",
+						icon: "none",
 						position: "top"
 					})
 					return;
@@ -196,37 +212,37 @@
 					}
 				})
 			},
-		
-			getNextPage: function(){
+
+			getNextPage: function() {
 				let self = this;
 				uni.request({
 					url: getApp().globalData.domain + "/items",
-					data:{
+					data: {
 						page: self.page + 1,
 						size: self.size,
 						location: self.array[self.index]
 					},
-					success: (res)=>{
+					success: (res) => {
 						let data = res.data;
 						// 判断接口返回信息
-						if (data.mes){
+						if (data.mes) {
 							uni.showToast({
 								title: data.mes,
 								icon: "none"
 							})
 							return;
 						}
-						if (data.data.length){
+						if (data.data.length) {
 							// 如果不为空，添加项目，翻页，提示
-							data.data.forEach(item=>{
+							data.data.forEach(item => {
 								self.productList.push(item)
-							})	;
+							});
 							self.page += 1;
 							uni.showToast({
 								title: "加载成功"
 							})
 						}
-						
+
 						// console.log(data);
 					}
 				})
