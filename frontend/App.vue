@@ -7,7 +7,7 @@
 			}
 		},
 		globalData:{
-			domain: "http://ftp.12138.site:666",
+			domain: "http://tripdemo.12138.site",
 			Login: function(thi){
 				if (!uni.getStorageSync("userId")){
 					return
