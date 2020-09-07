@@ -241,4 +241,8 @@
 		max-height: 75%;
 		border-radius: 50%;
 	}
+	
+	neil-modal{
+		overflow: scroll;
+	}
 </style>

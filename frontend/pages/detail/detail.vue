@@ -4,35 +4,65 @@
 			<image class="banner-img" :src="banner.cover"></image>
 			<view class="banner-title">{{banner.title}}</view>
 		</view>
-		<!-- <view class="article-meta">
-			<text class="article-author">{{banner.author_name}}</text>
-			<text class="article-text">发表于</text>
-			<text class="article-time">{{banner.published_at}}</text>
-		</view> -->
-		<br>
-		<view class="article-content">
-			<!-- <rich-text :nodes="htmlString"></rich-text> -->
-			<text class="content">{{htmlString}}</text>
+
+		<!-- start -->
+		<view class="swiperMain">
+			<view class="swiperHead">
+
+				<!--组件-->
+				<swiperNavBar :scrollIntoView="scrollIntoView" :swiperTabList='swiperTabList' :swiperTabIdx='swiperTabIdx'
+				 :currentSwiperWidth='currentSwiperWidth' :currentSwiperHeight='currentSwiperHeight' :swiperCurrentSize='swiperCurrentSize'
+				 :swiperColor='swiperColor' :swiperCurrentColor='swiperCurrentColor' :currentSwiperLineShow="currentSwiperLineShow"
+				 :currentSwiperLineActiveWidth="currentSwiperLineActiveWidth" :currentSwiperLineActiveHeight="currentSwiperLineActiveHeight"
+				 :currentSwiperLineActiveBg="currentSwiperLineActiveBg" :currentSwiperLineAnimatie="currentSwiperLineAnimatie" v-if=" swiperTabList.length > 1 "
+				 @change="CurrentTab">
+				</swiperNavBar>
+				<!--组件-->
+			</view>
+
+			<!--内容-->
+			<view class="swiperCont" style="{ paddingTop:currentSwiperHeight + 'rpx' }">
+				<swiper class="swiper" :style="{ height:mainHeight + 'px' }" :current="swiperTabIdx" @change="SwiperChange">
+					<swiper-item class="swiperItem" v-for="(item,index) in swiperTabList" :key='index'>
+						<!-- 简介 -->
+						<view v-if="index==0" class="swiper-content">
+							<center><h2>景区简介</h2>{{htmlString}}</center>
+						</view>
+						<!-- 评论列表与添加评论 -->
+						<view v-if="index==1" class="swiper-comment">
+							<button @tap="writeComment">我要评论</button>
+							<br>
+							<view v-if="comments.length==0">还没有评论哦，快来添加吧！</view>
+							<view v-for="(info,flag) in comments" class="all-comments" :key='flag'>
+								<view class="col-left">
+									<image class="user-head" :src="g_url+info['userAvatar']" @tap="leaveMessage(flag)"></image>
+								</view>
+								<view class="col-right" @tap="viewComment(flag)">
+									<view class="c-title">{{getLocalTime(info['createTime'])}} {{info['username']}}</view>
+									<view class="c-content">{{info['content']}}</view>
+								</view>
+							</view>
+						</view>
+					</swiper-item>
+				</swiper>
+			</view>
+			<!--内容-->
 		</view>
-		<!-- #ifdef MP-WEIXIN -->
-		<ad v-if="htmlString" unit-id="adunit-01b7a010bf53d74e"></ad>
-		<!-- #endif -->
+		<!-- end -->
+		<neil-modal :show="show" @close="bindClose(1)" title="添加评论" @confirm="bindBtn(1)" cancelText="取消" confirmText="提交">
+			<input v-model="commentText" type="text" placeholder="请填写你的评论内容" />
+		</neil-modal>
+		<neil-modal :show="show1" v-if="comments.length!=0" @close="bindClose(2)" title="留言详情" @confirm="bindBtn(2)"
+		 :showCancel="false">
+			<view class="view-content">{{comments[commentFlag].content}}</view>
+		</neil-modal>
+		<neil-modal :show="show2" @close="bindClose(3)" title="留言" @confirm="bindBtn(3)" cancelText="取消" confirmText="提交">
+			<input v-model="leaveContent" type="text" placeholder="对ta说点什么吧" />
+		</neil-modal>
+		<br>
+
 		<view>
 			<hr>
-
-			<!--
-			<view class='line'>
-				<view class='lineLeft'>地址</view>
-				<view class="lineRight">
-					<picker @change="change" mode="region" data-name="region" :value="form.region" :custom-item="customItem">
-						<view class="picker">
-							{{form.region[0]}}，{{form.region[1]}}，{{form.region[2]}}
-						</view>
-					</picker>
-					<view class="tips tri"></view>
-				</view>
-			</view>
-			-->
 			<br>
 			<view class="buttonBox" @click="submit">
 				提交订单
@@ -45,13 +75,21 @@
 <script>
 	const valid = require('../../util/valid.js'); //校验规则文件
 	const util = require('../../util/util.js'); //防重点击函数
-	import Copyright from '@/components/Copyright/Copyright.vue'
+	import Copyright from '@/components/Copyright/Copyright.vue';
+	import swiperNavBar from "../../components/swiperNavBar.vue";
+	import neilModal from '@/components/neil-modal/neil-modal.vue';
 	export default {
 		components: {
-			Copyright
+			Copyright,
+			swiperNavBar,
+			neilModal
 		},
 		data() {
 			return {
+				g_url: getApp().globalData.domain,
+				show: false,
+				show1: false,
+				show2: false,
 				id: 0,
 				title: 'list-triplex-row',
 				banner: {
@@ -60,12 +98,34 @@
 					author_name: '西蒙牛',
 					published_at: '2020-07-14'
 				},
-				htmlString: "少林寺，是中国佛教禅宗祖庭和中国功夫的发源地，现为世界文化遗产、全国重点文物保护单位、国家AAAAA级旅游景区，位于河南省郑州市登封市嵩山五乳峰下，因坐落于嵩山腹地少室山茂密丛林之中，故名“少林寺”。始建于北魏太和十九年（495年），是孝文帝为了安置他所敬仰的印度高僧跋陀尊者，在与都城洛阳相望的嵩山少室山北麓敕建而成。少林寺常住院占地面积约57600平方米，现任方丈是曹洞正宗第47世、第33代嗣祖沙门释永信。 [1-2]  少林寺是世界著名的佛教寺院，是汉传佛教的禅宗祖庭，在中国佛教史上占有重要地位，被誉为“天下第一名刹”。因其历代少林武僧潜心研创和不断发展的少林功夫而名扬天下，素有“天下功夫出少林，少林功夫甲天下”之说。",
+				htmlString: "",
 
 				form: {
 					region: ['广东省', '广州市', '海珠区'] //默认参数
-				}
-
+				},
+				/*************/
+				//导航栏用
+				scrollIntoView: 0, //设置哪个方向可滚动，则在哪个方向滚动到该元素
+				swiperTabList: ['简介', '评论'], //导航列表
+				swiperTabIdx: 0,
+				swiperCurrentSize: '26rpx', //导航的字体大小
+				swiperColor: '#333333', //导航栏字体未选中前颜色
+				swiperCurrentColor: '#1D63FF', //选中当前导航栏字体颜色
+				currentSwiperWidth: '50%', //当前导航的宽度 % upx rpx px  （导航超出可左右滑动 ）
+				currentSwiperHeight: 70, //当前导航的高度度 rpx px
+				mainHeight: 360, //全屏或者局部滑动设置的高度
+				currentSwiperLineShow: true, //是否显示导航栏的线条 （线条距离标题太近的话可自行修改.swiperLine的css）
+				currentSwiperLineActiveBg: '#1D63FF', //当前选中的导航栏线条颜色
+				currentSwiperLineActiveWidth: '30rpx', //当前选中的导航栏线条的宽度 upx rpx px
+				currentSwiperLineActiveHeight: '3rpx', //当前选中的导航栏线条的高度度 upx rpx px
+				currentSwiperLineAnimatie: 300, //当前选中的导航栏线条过渡效果
+				/*****************/
+				comments: [], //评论列表
+				commentText: "",
+				commentContent: "",
+				commentFlag: 0,
+				leaveContent: "",
+				leaveFlag: 0,
 			}
 		},
 		onShareAppMessage() {
@@ -74,17 +134,10 @@
 				path: '/pages/detail/detail?detailDate=' + JSON.stringify(this.banner)
 			}
 		},
+		onShow() {
+			this.getComments();
+		},
 		onLoad(option) {
-			// 目前在某些平台参数会被主动 decode，暂时这样处理。
-			/*
-            try {
-                this.banner = JSON.parse(decodeURIComponent(event.detailDate));
-            } catch (error) {
-                this.banner = JSON.parse(event.detailDate);
-            }*/
-
-			//this.getDetail();
-			// console.log(option)
 			this.banner.title = option.name
 			this.banner.cover = option.imageUrl
 			this.htmlString = option.detail
@@ -94,6 +147,112 @@
 			});
 		},
 		methods: {
+			//留言
+			leaveMessage: function(flag) {
+				this.show2 = true;
+				this.leaveFlag = flag;
+			},
+			//浏览评论
+			viewComment: function(flag) {
+				this.show1 = true;
+				this.commentFlag = flag;
+			},
+			getLocalTime: function(nS) {
+				return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/, ' ');
+			},
+			//添加评论
+			writeComment: function() {
+				this.show = true;
+			},
+			bindClose: function(f) {
+				if (f == 1) {
+					this.show = false;
+				}
+				if (f == 2) {
+					this.show1 = false;
+				}
+				if (f == 3) {
+					this.show2 = false;
+				}
+			},
+			bindBtn: function(f) { //成功添加评论
+				let self = this;
+				if (f == 1) {
+					this.show = false;
+					uni.request({
+						url: getApp().globalData.domain + "/comments/",
+						method: "POST",
+						header: {
+							token: uni.getStorageSync("token"),
+							"content-type": "application/x-www-form-urlencoded"
+						},
+						data: {
+							itemId: self.id,
+							content: self.commentText
+						},
+						success: (res) => {
+							// console.log(res.data);
+							self.getComments();
+							setTimeout(function() {
+								uni.showToast({
+									title: "添加成功！",
+								}, 1000);
+							});
+							self.commentText = "";
+						}
+					})
+				}
+				if (f == 3) { //给该用户发送消息
+					this.show2 = false;
+					console.log(self.comments[self.leaveFlag]['user']);
+					uni.request({
+						url: getApp().globalData.domain + "/messages/",
+						method: "POST",
+						header: {
+							token: uni.getStorageSync("token"),
+							"content-type": "application/x-www-form-urlencoded"
+						},
+						data: {
+							toId: self.comments[self.leaveFlag]['user'],
+							content: self.leaveContent
+						},
+						success: (res) => {
+							console.log(res.data);
+							// self.getComments();
+							setTimeout(function() {
+								uni.showToast({
+									title: "留言成功！",
+								}, 1000);
+							});
+							self.leaveContent = "";
+						}
+					})
+				}
+
+			},
+			//获取评论列表
+			getComments: function() {
+				let self = this;
+				// console.log(self.id)
+				uni.request({
+					url: getApp().globalData.domain + "/comments",
+					method: "GET",
+					data: {
+						itemId: self.id
+					},
+					header: {
+						token: uni.getStorageSync("token"),
+					},
+					success: (res) => {
+						console.log(res);
+						self.comments = res.data.data;
+					},
+					fail: (res) => {
+						console.log("fail")
+						self.comments = [];
+					}
+				})
+			},
 			// 输入框或者picker事件方法
 			change(e) {
 				let name = e.currentTarget.dataset.name;
@@ -137,7 +296,7 @@
 				this.addIndent(uni.getStorageSync("userId"), this.id)
 			},
 
-			addIndent: function(userId, itemId) {
+			addIndent: function(userId, itemId) { //添加订单
 				uni.request({
 					url: getApp().globalData.domain + "/indents/",
 					header: {
@@ -184,7 +343,22 @@
 						console.log('fail');
 					}
 				})
-			}
+			},
+
+			//tab点击事件 自行完善需要的代码
+			CurrentTab: function(index, item) {
+				this.swiperTabIdx = index;
+				this.scrollIntoView = Math.max(0, index - 1);
+				//console.log(index + '----' + item)
+			},
+			//滑动事件  自行完善需要的代码
+			SwiperChange: function(e) {
+				//console.log(e)
+				//console.log(e.detail)
+				//console.log(e.detail.current);
+				this.swiperTabIdx = e.detail.current;
+				this.scrollIntoView = Math.max(0, e.detail.current - 1);
+			},
 		},
 	}
 </script>
@@ -266,6 +440,7 @@
 		left: 0;
 		right: 0;
 		background-color: #1da31b;
+		margin-top: 4px;
 	}
 
 	.banner {
@@ -331,5 +506,142 @@
 		font-size: 13px;
 		text-align: center;
 		width: 100%;
+	}
+
+	/***/
+	.swiperMain {
+		width: 100%;
+	}
+
+	.swiperHead {
+		// position: fixed;
+		top: 50;
+		z-index: 10;
+		width: 100%;
+		background: #FFFFFF;
+		margin-top: 1px;
+	}
+
+	.swiperTab {
+		// display: inline-flex;
+		flex-direction: column;
+		text-align: center;
+	}
+
+	.swiperCont {
+		width: 100%;
+		// padding-top: 70rpx;
+	}
+
+	// /* #ifdef H5 */
+	// .swiperHead {
+	// 	// position: fixed;
+	// 	top: 44px;
+	// 	z-index: 10;
+	// 	width: 100%;
+	// 	background: #FFFFFF;
+	// }
+
+	/* #endif */
+
+	.swiper {
+		width: 100%;
+		height: 400rpx;
+	}
+
+	.swiperItem {
+		height: 400rpx;
+		line-height: 400rpx;
+		overflow: auto;
+		background: rgba(0, 0, 0, 0);
+		text-align: center;
+		color: #FFFFFF;
+		font-size: 30upx;
+	}
+
+	.swiperItem image {
+		width: 85%;
+		height: 72%;
+		display: block;
+		border-radius: 50%;
+	}
+
+	/*自定义*/
+	.swiper-content {
+		text-align: center;
+		padding: 20 40upx;
+		overflow: scroll;
+		font-size: 30upx;
+		margin: 30upx 50upx;
+		color: black;
+	}
+
+	.swiper-user {
+		text-align: center;
+		padding: 20 40upx;
+		overflow: scroll;
+		font-size: 30upx;
+		margin: 30upx 50upx;
+		color: black;
+	}
+
+	.swiper-comment {
+		white-space: pre-wrap;
+		text-align: left;
+		padding: 20 40upx;
+		overflow: scroll;
+		font-size: 30upx;
+		margin: 30upx 50upx;
+		color: black;
+	}
+
+	.all-comments {
+		border-radius: 20upx;
+		width: 100%;
+		height: 180upx;
+		background-color: #ffffff;
+		margin-left: 1px;
+		margin-right: 2px;
+		// margin-top: 40upx; 
+		margin-bottom: 35upx;
+		display: flex;
+		padding-right: 5upx;
+		padding-bottom: 5upx;
+		box-shadow: 2px 2px 6px rgba(0, 0, 0, .125), -2px -2px 6px rgba(0, 0, 0, .125);
+	}
+
+	.col-left {
+		flex: 20%;
+		max-width: 20%;
+		padding: 8px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.col-right {
+		margin-top: 8px;
+		flex: 80%;
+		z-index: 1;
+		/* height: 50upx; */
+	}
+
+	.c-title {
+		padding: 8px;
+		font-weight: 600;
+		font-size: 12px;
+		font-family: kaiti;
+		text-align: left;
+	}
+
+	.c-content {
+		margin-top: 8px;
+		flex: 80%;
+		z-index: 1;
+		/* height: 50upx; */
+	}
+
+	.view-content {
+		overflow: scroll;
 	}
 </style>

@@ -259,6 +259,6 @@
     }
 	.neil-modal__content{
 		height: 300upx;
-		overflow-y: scroll;
+		overflow: scroll;
 	}
 </style>

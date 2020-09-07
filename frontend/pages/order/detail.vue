@@ -35,7 +35,6 @@
 				indentType: 0,
 				avatar: "/static/logo.jpg"
 			}
-			sss
 		},
 		onLoad(option) {
 			this.indentNo = option.indentNo;
