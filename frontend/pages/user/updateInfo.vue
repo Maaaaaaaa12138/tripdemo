@@ -44,7 +44,7 @@
 		data() {
 			return {
 				//logo图片 base64
-				domain: "http://ftp.12138.site:666",
+				domain: getApp().globalData.domain,
 				avatar: '/static/avatar/logo.jpg',
 				phoneData: '', //电话
 				showAgree: false,
