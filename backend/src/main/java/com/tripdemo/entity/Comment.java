@@ -1,23 +1,32 @@
 package com.tripdemo.entity;
 
-public class Commit {
+public class Comment {
     private int id;
     private int user;
     private int item;
     private int createTime;
     private String content;
     private String userAvatar;
+    private String username;
 
-    public Commit() {
+    public Comment() {
     }
 
-    public Commit(int id, int user, int item, int createTime, String content, String userAvatar) {
+    public Comment(int id, int user, int item, int createTime, String content, String userAvatar) {
         this.id = id;
         this.user = user;
         this.item = item;
         this.createTime = createTime;
         this.content = content;
         this.userAvatar = userAvatar;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getId() {

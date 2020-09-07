@@ -19,7 +19,7 @@ class Intent(models.Model):
 
     class Meta:
         managed = True
-        db_table = 'intent'
+        db_table = 'indent'
 
 
 class Item(models.Model):
@@ -115,7 +115,7 @@ class PasswordWrong(models.Model):
     class Meta:
         db_table = "passwordWrong"
 
-class Commit(models.Model):
+class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="user")
     content = models.TextField()
     createTime = models.IntegerField()
@@ -125,4 +125,4 @@ class Commit(models.Model):
         return self.user.username + "-" + self.item.name
     
     class Meta:
-        db_table = "commit"
+        db_table = "comment"

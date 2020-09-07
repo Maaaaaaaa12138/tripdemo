@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.Arrays;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("users")
 public class UserController {

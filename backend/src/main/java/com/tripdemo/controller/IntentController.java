@@ -19,6 +19,7 @@ import java.util.List;
 /**
  * 订单相关接口实现
  */
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/indents")
 public class IntentController {
