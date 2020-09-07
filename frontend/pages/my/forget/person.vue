@@ -158,7 +158,7 @@
 					return;
 				}
 				if (this.passData.length < 6) {
-					this.$queue.showToast('密码必须大于6位');
+					this.showMsg("密码必须大于6位");
 					return;
 				}
 				this.toForget();
@@ -170,6 +170,7 @@
 <style>
 	@import url('../../../static/css/icon.css');
 	@import url('../../../static/css/main.css');
+
 	.senCode {
 		font-size: 14px;
 		color: #3399ff;
@@ -260,8 +261,8 @@
 		padding-right: 10 upx;
 		margin-left: 20 upx;
 	}
-	
-	.Copyright{
+
+	.Copyright {
 		position: fixed;
 		bottom: 10px;
 		font-family: kaiti;
@@ -269,6 +270,5 @@
 		font-size: 13px;
 		text-align: center;
 		width: 100%;
-	}	
-	
+	}
 </style>
