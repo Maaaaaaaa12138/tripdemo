@@ -11,6 +11,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("commits")
 public class CommitController {
