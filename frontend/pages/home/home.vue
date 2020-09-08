@@ -87,6 +87,7 @@
 			}, 300);
 			//获取此时定位
 			let _self = this;
+			_self.loadData(); //确定城市后获取使用列表
 			uni.getLocation({
 				type: 'wgs84',
 				geocode: 'true',
@@ -96,13 +97,14 @@
 					for (i = 0; i < 9; i++) {
 						if (res.address.city.substr(0, res.address.city.length - 1) == _self.array[i]) {
 							//返回的数据带一个市字，用方法去掉后进行比较,若不在预设城市群中默认为北京市
-							_self.index = i;
+							// _self.index = i;
 						}
 					}
 					//console.log('当前位置的省市：' + _self.array[_self.index]);
-					_self.loadData(); //确定城市后获取使用列表
+					// _self.loadData(); //确定城市后获取使用列表
 				}
 			});
+			_self.loadData(); //确定城市后获取使用列表
 		},
 		onReachBottom: function() {
 			this.getNextPage()
