@@ -126,15 +126,21 @@ public class UserService {
         return Tool.sendEmail(email, String.valueOf(content));
     }
 
-//    登录成功后设置Token
-    public String setToken(int userId){
+    //    登录成功后设置Token
+    public String setToken(int userId) {
+        MyToken token = userMapper.getToken(userId, "");
         String name = this.getUser(userId).getUsername();
         long ct = System.currentTimeMillis() / 1000;
-        String content = Tool.getCrpy(name + ct);
-        if (userMapper.getToken(userId, "") != null){
-            userMapper.updateToken(userId, content, ct);
+        if (token != null) {
+            // token未过期直接返回
+            if (token.getCreateTime() - ct < 29 * 24 * 3600) {
+                return token.getContent();
+            }
         }
-        else{
+        String content = Tool.getCrpy(name + ct);
+        if (userMapper.getToken(userId, "") != null) {
+            userMapper.updateToken(userId, content, ct);
+        } else {
             userMapper.setToken(userId, content, ct);
         }
         return content;
