@@ -126,3 +126,14 @@ class Comment(models.Model):
     
     class Meta:
         db_table = "comment"
+    
+class Favour(models.Model):
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_column="user")
+    item = models.ForeignKey(Item, on_delete=models.DO_NOTHING, db_column="item")
+    createTime = models.IntegerField(db_column="create_time")
+
+    def __str__(self):
+        return self.user.username + "-" + self.item.name
+    
+    class Meta:
+        db_table = "love"
