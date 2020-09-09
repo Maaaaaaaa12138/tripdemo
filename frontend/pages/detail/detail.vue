@@ -52,7 +52,7 @@
 		<!-- end -->
 		<neil-modal :show="show" @close="bindClose(1)" title="添加评论" @confirm="bindBtn(1)" cancelText="取消" confirmText="提交">
 			<textarea style="padding: 15px;" v-model="commentText" type="text" placeholder="请填写你的评论内容" />
-		</neil-modal>
+			</neil-modal>
 		<neil-modal :show="show1" v-if="comments.length!=0" @close="bindClose(2)" title="评论详情" @confirm="bindBtn(2)"
 		 :showCancel="false">
 			<view class="view-content">{{comments[commentFlag].content}}</view>
@@ -609,6 +609,12 @@
 		padding-right: 5upx;
 		padding-bottom: 5upx;
 		box-shadow: 2px 2px 6px rgba(0, 0, 0, .125), -2px -2px 6px rgba(0, 0, 0, .125);
+		overflow: hidden;
+		// word-break: break-all;
+		// text-overflow: ellipsis;
+		// display: -webkit-box;
+		// -webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
 	}
 
 	.col-left {
@@ -643,6 +649,12 @@
 		width: 90%;
 		text-overflow: ellipsis;
 		overflow-x: hidden;
+		overflow: hidden;
+		word-break: break-all;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 1;
 		/* height: 50upx; */
 	}
 
