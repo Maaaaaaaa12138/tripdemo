@@ -5,3 +5,6 @@
 - backend： 后端demo，基于springboot搭建
 - fronted：前端demo，基于uni-app搭建
 - doc: api文档
+
+### 更新
+PC端：http://tripdemo.12138.site:233/
