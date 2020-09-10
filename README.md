@@ -6,5 +6,7 @@
 - fronted：前端demo，基于uni-app搭建
 - doc: api文档
 
+> 由于中途需求更改，PC端并不在此库中， PC端库地址：https://github.com/ArmandAlbert/tripdemoPC
+
 ### 更新
 PC端：http://tripdemo.12138.site:233/
