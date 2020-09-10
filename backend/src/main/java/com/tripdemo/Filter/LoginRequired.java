@@ -45,8 +45,13 @@ public class LoginRequired implements Filter {
             resp.getWriter().append("request error");
         }
         else{
-            req.setAttribute("userId", token.getUserId());
-            chain.doFilter(request, response);
+            if (userService.checkToken(token.getUserId(), tokenStr)){
+                req.setAttribute("userId", token.getUserId());
+                chain.doFilter(request, response);
+            }
+            else{
+                resp.getWriter().append("request error");
+            }
         }
     }
 
