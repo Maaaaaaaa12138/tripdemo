@@ -80,7 +80,6 @@
 			}
 		},
 		onLoad() {
-			// console.log(getApp(	).globalData.domain)
 			this.getHotItems();
 			setTimeout(() => {
 				this.renderImage = true;

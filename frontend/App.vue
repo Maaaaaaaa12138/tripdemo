@@ -7,7 +7,7 @@
 			}
 		},
 		globalData:{
-			domain: "http://tripdemo.12138.site",
+			domain: "http://127.0.0.1:12345/api",
 			Login: function(thi){
 				if (!uni.getStorageSync("userId")){
 					return

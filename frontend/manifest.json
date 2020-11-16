@@ -111,5 +111,16 @@
     },
     "uniStatistics" : {
         "enable" : false
+    },
+    "h5" : {
+        "title" : "去哪儿",
+        "domain" : "trip.12138.site",
+        "router" : {
+            "mode" : "history",
+            "base" : "/mobile/"
+        },
+        "devServer" : {
+            "https" : false
+        }
     }
 }

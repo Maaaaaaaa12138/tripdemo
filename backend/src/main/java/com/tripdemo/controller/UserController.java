@@ -136,7 +136,7 @@ public class UserController {
     @PostMapping("/avatar")
     // 实现图片上传
     public String addAvatar(@RequestParam("file") MultipartFile file) {
-        final String fileDir = "src\\main\\resources\\static\\avatar\\";
+        final String fileDir = "../static/avatar/";
         String fileName;
         if (!file.isEmpty()) {
             try {
